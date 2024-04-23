@@ -51,3 +51,4 @@ Route::get('/benih_data/{id}/pertanian', [BenihDataController::class, 'detailper
 Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 
 
+include __DIR__ . '/faisal.php';

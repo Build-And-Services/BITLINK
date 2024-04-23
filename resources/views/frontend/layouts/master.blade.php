@@ -119,7 +119,7 @@
 											</li>
 											<li><a href="#">Profil </a></li>
 											<li><a href="#">Monitoring dan Edukasi </a></li>
-											<li><a href="detailpesan.blade.php">Pesanan </a></li>
+											<li><a href="{{ route('pesanan.index') }}">Pesanan </a></li>
 											
 										</ul>
 									</nav>
