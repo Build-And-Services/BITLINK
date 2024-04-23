@@ -52,3 +52,4 @@ Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 
 
 include __DIR__ . '/faisal.php';
+require __DIR__."/heri.php";
