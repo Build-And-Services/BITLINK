@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Pembeli;
+namespace App\Http\Controllers;
 
 use App\Models\BenihData;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PesananController extends Controller
 {
     public function index()
     {
         $benihData = BenihData::all();
-        return view('pembeli.pesanan.index', compact('benihData'));
+        return view('frontend.pesanan.index', compact('benihData'));
     }
     public function detail($id)
     {
         $benihData = BenihData::find($id);
-        return view('pembeli.pesanan.detail', compact('benihData'));
+        return view('frontend.pesanan.detail', compact('benihData'));
     }
 }
