@@ -8,13 +8,13 @@
 		<meta name="description" content="">
 		<meta name='copyright' content=''>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		
+
 		<!-- Title -->
         <title>Bitlink-Nganjuk Nyawiji Mbangun Desa Noto Khuto.</title>
-		
+
 		<!-- Favicon -->
         <link rel="icon" href="img/bitlink.png">
-		
+
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
@@ -36,24 +36,24 @@
         <link rel="stylesheet" href={{asset("css/animate.min.css")}}>
 		<!-- Magnific Popup CSS -->
         <link rel="stylesheet" href={{asset("css/magnific-popup.css")}}>
-		
+
 		<!-- Medipro CSS -->
         <link rel="stylesheet" href={{asset("/css/normalize.css")}}>
         <link rel="stylesheet" href={{asset("style.css")}}>
         <link rel="stylesheet" href={{asset("css/responsive.css")}}>
-		
+
 		{{-- <link rel="stylesheet" href={{asset("css/detail.css")}}> --}}
-		
+
     </head>
     <body>
-	
+
 		<!-- Preloader -->
         <div class="preloader">
             <div class="loader">
                 <div class="loader-outter"></div>
                 <div class="loader-inner"></div>
 
-                <div class="indicator"> 
+                <div class="indicator">
                     <svg width="16px" height="12px">
                         <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
                         <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <!-- End Preloader -->
-	
+
 		<!-- Header Area -->
 		<header class="header" >
 			<!-- Topbar -->
@@ -106,7 +106,7 @@
 								<div class="mobile-nav"></div>
 								<!-- End Mobile Nav -->
 							</div>
-							<div class="col-lg-7 col-md-9 col-12">
+							<div class="">
 								<!-- Main Menu -->
 								<div class="main-menu">
 									<nav class="navigation">
@@ -120,16 +120,14 @@
 											<li><a href="#">Profil </a></li>
 											<li><a href="#">Monitoring dan Edukasi </a></li>
 											<li><a href="{{ route('pesanan.index') }}">Pesanan </a></li>
-											
+											<li><a href="{{url('/permintaan-pesanan')}}">Permintaan Pesanan </a></li>
+                                            <div class="get-quote">
+                                                <a href="/logout" class="btn">LOG OUT</a>
+                                            </div>
 										</ul>
 									</nav>
 								</div>
 								<!--/ End Main Menu -->
-							</div>
-							<div class="col-lg-2 col-12">
-								<div class="get-quote">
-									<a href="/logout" class="btn">LOG OUT</a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -171,7 +169,7 @@
 											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
 											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Services</a></li>
 											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Our Cases</a></li>
-											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Other Links</a></li>	
+											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Other Links</a></li>
 										</ul>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
@@ -180,7 +178,7 @@
 											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Finance</a></li>
 											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Testimonials</a></li>
 											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>FAQ</a></li>
-											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>	
+											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>
 										</ul>
 									</div>
 								</div>
@@ -227,7 +225,7 @@
 			<!--/ End Copyright -->
 		</footer>
 		<!--/ End Footer Area -->
-		
+
 		<!-- jquery Min JS -->
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
 		<!-- jquery Migrate JS -->

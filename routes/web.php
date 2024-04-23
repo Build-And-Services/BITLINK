@@ -55,6 +55,8 @@ Route::get('/benih_data/{id}/pertanian', [BenihDataController::class, 'detailper
 
 Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 
+require __DIR__ . '/rafi.php';
+
 
 include __DIR__ . '/faisal.php';
 require __DIR__."/heri.php";
