@@ -128,7 +128,7 @@
 							</div>
 							<div class="col-lg-2 col-12">
 								<div class="get-quote">
-									<a href="appointment.html" class="btn">LOG OUT</a>
+									<a href="/logout" class="btn">LOG OUT</a>
 								</div>
 							</div>
 						</div>
@@ -136,7 +136,6 @@
 				</div>
 			</div>
 			<!--/ End Header Inner -->
-
 		</header>
 		<!-- End Header Area -->
 

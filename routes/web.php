@@ -2,13 +2,18 @@
 
 use App\Http\Controllers\BenihDataController;
 use App\Http\Controllers\DataPencatatanController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 
 
 Route::get('/', function () {
-    return view('frontend.home');
+    if(Auth::check()){
+        return view('frontend.home');
+    }else{
+        return view('frontend.home-noauth');
+    }
 })->name('home');
 
 
