@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
 <link rel="stylesheet" href={{asset("css/display.css")}}>
 <script src="{{ asset('js/display.js') }}"></script>
@@ -24,7 +24,7 @@
 							</div>
 						</div>
 					@endif
-				@endforeach				
+				@endforeach
 				</div>
 			</div>
 		</section>

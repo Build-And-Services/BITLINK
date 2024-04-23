@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
 <link rel="stylesheet" href={{asset("css/detail.css")}}>
 
@@ -41,7 +41,7 @@
               <p class="text-with-underline">Stok: {{ $benihData->stok_benih }}</p>
               <p class="text-with-underline">Jenis: {{ $benihData->jenis_benih }}</p>
               <p class="text-with-underline">Kelas Benih: {{ $benihData->kualitas_benih }}</p>
-  
+
               <div class="quantity-control">
                 <label for="quantity" class="visually-hidden">Quantity</label>
                 <div class="input-group">
@@ -51,8 +51,8 @@
                   <button type="button" class="btn btn-sm btn-primary" aria-label="Increase Quantity" onclick="incrementQuantity()">+</button>
                 </div>
               </div>
-              
-  
+
+
               <a href="#" class="btn btn-success" role="button" aria-disabled="true">Pesan</a>
             </div>
           </div>
@@ -60,7 +60,7 @@
       </div>
     </div>
   </section>
-  
+
   <script>
   function incrementQuantity() {
     const quantityInput = document.getElementById('quantity');
@@ -69,7 +69,7 @@
     quantityInput.value = quantity;
     updateOrderButton();
   }
-  
+
   function decrementQuantity() {
     const quantityInput = document.getElementById('quantity');
     let quantity = parseInt(quantityInput.value);
@@ -77,13 +77,13 @@
     quantityInput.value = quantity;
     updateOrderButton();
   }
-  
+
   function updateOrderButton() {
     const quantity = document.getElementById('quantity').value;
     const orderButton = document.querySelector('.detail-bibit .content .btn.btn-success');
     orderButton.disabled = quantity === '0'; // Disable button if quantity is 0
   }
-  
+
   // Call updateOrderButton on page load to handle initial state
   updateOrderButton();
   </script>

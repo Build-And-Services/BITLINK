@@ -1,6 +1,6 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
-		
+
 		<!-- Slider Area -->
 		<section class="slider">
 			<div class="hero-slider">
@@ -61,7 +61,7 @@
 			</div>
 		</section>
 		<!--/ End Slider Area -->
-		
+
 		<!-- Start Schedule Area -->
 		<section class="schedule">
 			<div class="container">

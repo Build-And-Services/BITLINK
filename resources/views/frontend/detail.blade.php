@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
 <link rel="stylesheet" href={{asset("css/detail.css")}}>
 		<!-- Breadcrumbs -->
@@ -40,7 +40,7 @@
                             <h4>Informasi Stok Benih</h4>
                             <p class="text-with-underline">Stok: {{ $benihData->stok_benih }}</p>
                             <p class="text-with-underline">Jenis: {{ $benihData->jenis_benih }}</p>
-                            <p class="text-with-underline">Kelas Benih: {{ $benihData->kualitas_benih }}</p>                            
+                            <p class="text-with-underline">Kelas Benih: {{ $benihData->kualitas_benih }}</p>
                         </div>
                         <a href="{{ route('BenihData.edit', $benihData->id_benih) }}" class="btn btn-primary">Edit</a>
                         <a href="#" class="btn btn-danger" id="delete-button">Delete</a>

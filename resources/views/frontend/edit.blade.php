@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
 
 <section class="edit-bibit section">
@@ -61,7 +61,7 @@
           <div class="img-preview">
             <img src="{{ asset('img/'.$benihData->foto_benih) }}" alt="#">
           </div>
-        
+
           <div class="form-group">
             <label for="foto_benih">Foto Benih:</label>
             <input type="file" name="foto_benih" id="foto_benih" value="{{ old('foto_benih', $benihData->foto_benih) }}"class="form-control">

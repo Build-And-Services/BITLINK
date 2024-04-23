@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
 <link rel="stylesheet" href={{asset("css/tambah.css")}}>
 		<!-- Tambah Bibit Section -->
