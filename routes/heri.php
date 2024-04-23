@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,33 +31,8 @@ Route::prefix('kedelai')->group(function(){
 });
 
 
-Route::get('/login', function (){
-    return view('auth.login');
-});
-
-Route::post('/login', function (Request $request){
-    
-    $credentials = $request->validate([
-        'email' => 'required',
-        'password' => 'required',
-    ]);
-
-    try {
-        if(Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-    } catch (\Throwable $th) {
-        return back();
-    }
-});
-
-
-Route::get('/logout', function (){
-    Auth::logout();
-    return back();
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'index');
+    Route::post('/login', 'login');
+    Route::get('/logout', 'logout');
 });
