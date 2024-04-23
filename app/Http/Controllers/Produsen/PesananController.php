@@ -11,11 +11,11 @@ class PesananController extends Controller
     public function index()
     {
         $benihData = BenihData::all();
-        return view('pembeli.pesanan.index', compact('benihData'));
+        return view('produsen.pesanan.index', compact('benihData'));
     }
     public function detail($id)
     {
         $benihData = BenihData::find($id);
-        return view('pembeli.pesanan.detail', compact('benihData'));
+        return view('produsen.pesanan.detail', compact('benihData'));
     }
 }
