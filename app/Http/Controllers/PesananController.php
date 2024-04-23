@@ -15,6 +15,6 @@ class PesananController extends Controller
     public function detail($id)
     {
         $benihData = BenihData::find($id);
-        return view('frontend.pesanan.detail', compact('benihData'));
+        return view('frontend.pesanan.invoice', compact('benihData'));
     }
 }
