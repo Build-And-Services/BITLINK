@@ -113,8 +113,8 @@
 										<ul class="nav menu">
 											<li class="active"><a href="#">Produk Benih <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
-													<li><a href="{{ url('/pages/display/padi') }}">Benih Padi</a></li>
-													<li><a href="{{ url('/pages/display/kedelai') }}">Benih Kedelai</a></li>
+													<li><a href="{{ url('/padi') }}">Benih Padi</a></li>
+													<li><a href="{{ url('/kedelai') }}">Benih Kedelai</a></li>
 												</ul>
 											</li>
 											<li><a href="#">Profil </a></li>
@@ -128,7 +128,7 @@
 							</div>
 							<div class="col-lg-2 col-12">
 								<div class="get-quote">
-									<a href="appointment.html" class="btn">LOG OUT</a>
+									<a href="/logout" class="btn">LOG OUT</a>
 								</div>
 							</div>
 						</div>
@@ -136,7 +136,6 @@
 				</div>
 			</div>
 			<!--/ End Header Inner -->
-
 		</header>
 		<!-- End Header Area -->
 
