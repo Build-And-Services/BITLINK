@@ -20,4 +20,9 @@ class Pesanan extends Model
     {
         return $this->belongsTo(BenihData::class, 'id_benih', 'id_benih');
     }
+
+    public function benihData()
+    {
+        return $this->belongsTo(BenihData::class, 'id_benih', 'id_benih');
+    }
 }
