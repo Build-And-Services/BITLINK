@@ -88,84 +88,80 @@
                 <div class="container " style="margin-top:100px">
 
 
-                  <div class="row">
-                    <div class="col-xl-8">
-                      <ul class="list-unstyled">
-                        <li class="text-dark text-uppercase "><span style="font-size:30px;font-weight:600">Invoice</span></li>
-                        <li class="text-dark ">Billed to </li>
-                        <li class="text-dark text-uppercase">{{$getDetailInvoice->pembeli->name}}</li>
-                        <li class="text-dark text-uppercase">{{$getDetailInvoice->alamat}}</li>
-                      </ul>
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <ul class="list-unstyled">
+                                <li class="text-dark text-uppercase "><span
+                                        style="font-size:30px;font-weight:600">Invoice</span></li>
+                                <li class="text-dark ">Billed to </li>
+                                <li class="text-dark text-uppercase">{{ $getDetailInvoice->pembeli->name }}</li>
+                                <li class="text-dark text-capitalize">{{ $getDetailInvoice->alamat_lengkap }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-4 mt-3 text-lg-end" style="text-align: end">
+                            <div class="" style="text-align: end;margin-right:4px">
+                                <p class=" text-lg-end">{{ $getPerusahaan->nama_perusahaan }}</p>
+                                <p class=" text-lg-end">{{ $getPerusahaan->alamat_lengkap }}</p>
+                                <p class=" text-lg-end">{{ $getPerusahaan->nomor_legalitas_usaha }}</p>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xl-4 mt-3 text-lg-end" style="text-align: end">
-                      <img style="width: 200px;height:100px;margin-right:-13px" src="{{asset('/img/bitlink.png')}}"/>
-                      <div class="" style="text-align: end;margin-right:4px">
-                          <p class=" text-lg-end">{{$getPerusahaan->nama_perusahaan}}</p>
-                          <p class=" text-lg-end">{{$getPerusahaan->alamat_lengkap}}</p>
-                          <p class=" text-lg-end">{{$getPerusahaan->nomor_legalitas_usaha}}</p>
 
-                      </div>
+                    <div class="row my-2 justify-content-between mt-4">
+                        <div class="col-2">
+                            <p class="" style="font-weight: bold">Invoice #</p>
+                            <p style="font-style: italic">{{ $getDetailInvoice->id }}</p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <p class="" style="font-weight: bold">Invoice Date</p>
+                            <p style="font-style: italic">{{ $getDetailInvoice->created_at->format('d M Y') }}</p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <p class="" style="font-weight: bold">Reference</p>
+                            <p style="font-style: italic">INV-057</p>
+                            <br>
+                            <br>
+                            <br>
+                            <p class="" style="font-weight: bold">Status</p>
+                            <p style="font-style: italic">{{ $getDetailInvoice->status_pembayaran }}</p>
+                        </div>
+                        <div class="col">
+                            <table class="table table-bordered rounded-3 overflow-hidden"
+                                style="border: 1px solid black;max-height:200px">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Pesanan</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Harga</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $getDetailInvoice->benihData->varietas }}</td>
+                                        <td>{{ $getDetailInvoice->quantity }}</td>
+                                        <td>Rp{{ $getDetailInvoice->harga }}</td>
+                                        <td>Rp{{ $getDetailInvoice->harga * $getDetailInvoice->quantity }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary">Total Pembayaran</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-primary">
+                                            Rp{{ $getDetailInvoice->harga * $getDetailInvoice->quantity }}</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
                     </div>
-                  </div>
-
-                  <div class="row my-2 justify-content-between">
-                      <div class="col-2">
-                        <p class="" style="font-weight: bold">Invoice #</p>
-                        <p style="font-style: italic">11786643</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <p class="" style="font-weight: bold">Invoice Date</p>
-                        <p style="font-style: italic">{{$getDetailInvoice->created_at->format('d M Y')}}</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <p class="" style="font-weight: bold">Reference</p>
-                        <p style="font-style: italic">INV-057</p>
-                        <br>
-                        <br>
-                        <br>
-                        <p class="" style="font-weight: bold">Status</p>
-                        <p style="font-style: italic">{{$getDetailInvoice->status_pembayaran}}</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <p class="" style="font-weight: bold">Due Date</p>
-                        <p style="font-style: italic">15 Agustus, 2024</p>
-                    </div>
-                      <div class="col">
-                          <table class="table table-bordered rounded-3 overflow-hidden" style="border: 1px solid black;max-height:200px" >
-                            <thead >
-                              <tr>
-                                <th scope="col">Pesanan</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Harga</th>
-                                <th scope="col">Total</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>{{$getDetailInvoice->benihData->varietas}}</td>
-                                <td>4</td>
-                                <td>$200</td>
-                                <td>$800</td>
-                              </tr>
-                              <tr>
-                                <td class="text-primary">Total Pembayaran</td>
-                                <td></td>
-                                <td></td>
-                                <td class="text-primary">$5000</td>
-                              </tr>
-
-                            </tbody>
-
-                          </table>
-                      </div>
-
-                  </div>
                   {{-- <div class="row">
                     <div class="col-xl-8">
                       <p class="ms-3">Add additional notes and payment information</p>
