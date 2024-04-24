@@ -73,7 +73,7 @@
             <div class="container mb-5 mt-3">
                 <div class="row d-flex  justify-content-between">
                     <div class="">
-                        <a href="{{ url('permintaan-pesanan') }}">
+                        <a href="{{ route('pesanan.index') }}">
                             <i class="fa-regular fa-circle-left fa-2xl"></i>
                         </a>
                     </div>
