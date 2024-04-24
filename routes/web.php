@@ -21,13 +21,8 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/pages/tambah', function () {
-    return view('frontend.tambah');
-});
 
-
-
-Route::get('/tambah-bibit', [BenihDataController::class, 'create'])->name('BenihData.create');
+Route::get('/tambah-benih', [BenihDataController::class, 'create'])->name('BenihData.create');
 
 Route::post('/benih_data', [BenihDataController::class, 'store'])->name('BenihData.store');
 
