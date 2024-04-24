@@ -98,8 +98,8 @@
                                     <li class="text-dark text-uppercase "><span
                                             style="font-size:30px;font-weight:600">Invoice</span></li>
                                     <li class="text-dark ">Billed to </li>
-                                    <li class="text-dark text-uppercase">Kardika Kresna</li>
-                                    <li class="text-dark text-uppercase"> Nganjuk, Jawa Timur </li>
+                                    <li class="text-dark text-uppercase">{{ $pesanan->pembeli->user->name }}</li>
+                                    <li class="text-dark text-uppercase"> {{ $pesanan->alamat_lengkap }}</li>
                                 </ul>
                             </div>
                             <div class="col-xl-4 mt-3 text-lg-end" style="text-align: end">
@@ -107,7 +107,7 @@
                                     src="{{ asset('/img/bitlink.png') }}" />
                                 <div class="" style="text-align: end;margin-right:4px">
                                     <p class=" text-lg-end">Business address</p>
-                                    <p class=" text-lg-end">City, State, IN - 000-000 </p>
+                                    <p class=" text-lg-end">{{ $pesanan->pembeli->alamat_lengkap }} </p>
                                     <p class=" text-lg-end">TAX ID - 199999</p>
 
                                 </div>
@@ -116,13 +116,13 @@
                         <div class="row my-2 justify-content-between">
                             <div class="col-2">
                                 <p class="" style="font-weight: bold">Invoice #</p>
-                                <p style="font-style: italic">ID PEMBAYARAN</p>
+                                <p style="font-style: italic">{{ $pesanan->id }}</p>
                                 <br>
                                 <br>
                                 <br>
                                 <br>
                                 <p class="" style="font-weight: bold">Invoice Date</p>
-                                <p style="font-style: italic">01 April, 2024</p>
+                                <p style="font-style: italic">{{ $pesanan->created_at->format('d-m-Y') }}</p>
                                 <br>
                                 <br>
                                 <br>
@@ -133,7 +133,7 @@
                                 <br>
                                 <br>
                                 <p class="" style="font-weight: bold">Status</p>
-                                <p style="font-style: italic">-</p>
+                                <p style="font-style: italic">{{ $pesanan->status_pembayaran }}</p>
                                 <br>
                                 <br>
                                 <br>
@@ -154,46 +154,16 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>INPARI 42</td>
-                                            <td>4</td>
-                                            <td>$200</td>
-                                            <td>$800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>INPARI 45</td>
-                                            <td>8</td>
-                                            <td>$500</td>
-                                            <td>$4000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>INPARI 47</td>
-                                            <td>2</td>
-                                            <td>$100</td>
-                                            <td>$200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>INPARI 47</td>
-                                            <td>2</td>
-                                            <td>$100</td>
-                                            <td>$200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>INPARI 47</td>
-                                            <td>2</td>
-                                            <td>$100</td>
-                                            <td>$200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>INPARI 47</td>
-                                            <td>2</td>
-                                            <td>$100</td>
-                                            <td>$200</td>
+                                            <td>{{ $pesanan->benih->varietas }}</td>
+                                            <td>{{ $pesanan->quantity }}</td>
+                                            <td>Rp{{ $pesanan->harga }}</td>
+                                            <td>Rp{{ $pesanan->quantity * $pesanan->harga }}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-primary">Total Pembayaran</td>
                                             <td></td>
                                             <td></td>
-                                            <td class="text-primary">$5000</td>
+                                            <td class="text-primary">Rp{{ $pesanan->quantity * $pesanan->harga }}</td>
                                         </tr>
 
                                     </tbody>
@@ -206,23 +176,26 @@
                     <div style="grid-column: span 4 / span 4; border-width: 2px; margin: 0px 8px 0px 8px">
                         <p style="font-weight: bold;text-align: center;" class="text-dark text-uppercase">cek status
                             pengiriman</p>
-                        <form
+                        <div
                             style="background-color: #ebebeb;border-radius: 0.375rem; margin: 8px 8px 0px 8px; display: block; padding: 20px">
+                            @csrf
                             <label for="id_pembayaran" class="text-dark">ID PEMBAYARAN</label>
                             <input id="id_pembayaran" name="id_pembayaran"
                                 style="border-radius: 0.375rem;width: 100%; outline: none" type="text">
-                            <button
+                            <button id="cek-pengiriman"
                                 style="background-color: #4D4AE7; margin-top: 16px; margin-left: auto; margin-right: auto;display: block"
                                 class="btn-sm btn-primary">Cek
                                 Pengiriman</button>
-                        </form>
+                        </div>
 
-                        <div style="border-radius: 0.375rem; margin: 20px 8px 0px 8px;border: 2px solid gray"
+                        <div id="status_pengiriman"
+                            style="border-radius: 0.375rem; margin: 20px 8px 0px 8px;border: 2px solid gray; display: none"
                             class="p-2">
                             <p class="text-dark text-capitalize text-dark">status pengiriman</p>
                             <div class="d-flex align-items-center" style="gap: 8px">
-                                <svg width="24" height="21" viewBox="0 0 24 21" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <svg id="mobil-svg" width="24" height="21" viewBox="0 0 24 21"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <rect width="24" height="21" fill="url(#pattern0_371_1751)" />
                                     <defs>
                                         <pattern id="pattern0_371_1751" patternContentUnits="objectBoundingBox"
@@ -235,8 +208,7 @@
                                     </defs>
                                 </svg>
                                 <div>
-                                    <span class="badge badge-warning">Sedang dikirim</span>
-                                    <span class="badge badge-success">Pesanan diterima</span>
+                                    <span class="badge text-uppercase"></span>
                                 </div>
                             </div>
                         </div>
@@ -245,9 +217,49 @@
             </div>
         </div>
     </div>
-
     <!-- jquery Min JS -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#cek-pengiriman').on('click', function(e) {
+                e.preventDefault();
+
+                var id_pembayaran = $('#id_pembayaran').val();
+                console.log(id_pembayaran)
+
+                $.ajax({
+                    url: "{{ route('pesanan.cekPengiriman') }}",
+                    method: "POST",
+                    data: {
+                        id_pembayaran: id_pembayaran,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#status_pengiriman').css('display', 'block');
+                        if (response && response.status_pengiriman !== undefined) {
+                            $('#status_pengiriman div span').text(response.status_pengiriman);
+                            if (response.status_pengiriman === 'SEDANG DIKIRIM') {
+                                $('#status_pengiriman div span').addClass('badge-warning');
+                            } else if (response.status_pengiriman === 'DITERIMA') {
+                                $('#status_pengiriman div span').addClass('badge-success');
+                            }
+                        } else {
+                            $('#mobil-svg').css('display', 'none');
+                            $('#status_pengiriman div span').text(
+                                "Respons tidak mengandung status pengiriman.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#mobil-svg').css('display', 'none');
+                        $('#status_pengiriman').css('display', 'block');
+                        $('#status_pengiriman div span').text('Data Tidak Ditemukan');
+                        $('#status_pengiriman div span').addClass('badge-danger');
+                    }
+                });
+            });
+        });
+    </script>
     <!-- jquery Migrate JS -->
     <script src="{{ asset('js/jquery-migrate-3.0.0.js') }}"></script>
     <!-- jquery Ui JS -->

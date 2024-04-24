@@ -8,7 +8,7 @@
                     <div class="col-lg-5">
                         <div class="single-bibit">
                             <div class="image">
-                                <img src="{{ asset('img/' . $item->foto_benih) }}" alt="#">
+                                <img src="{{ $item->foto_benih }}" alt="#">
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                                 <p class="text-with-underline">Jenis: {{ $item->jenis_benih }}</p>
                                 <p class="text-with-underline">Kelas Benih: {{ $item->kualitas_benih }}</p>
                             </div>
-                            <a href="{{ route('pesanan.detail', $item->id_benih) }}" style="background-color: #4D4AE7"
+                            <a href="{{ route('pesanan.invoice', $item->id_benih) }}" style="background-color: #4D4AE7"
                                 class="btn btn-primary">Status
                                 Pesanan</a>
                         </div>

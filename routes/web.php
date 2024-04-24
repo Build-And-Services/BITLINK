@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    if(Auth::check()){
+    if (Auth::check()) {
         return view('frontend.home');
-    }else{
+    } else {
         return view('frontend.home-noauth');
     }
 })->name('home');
@@ -61,22 +61,23 @@ Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 
 
 // tambahan route
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::get('/permintaan-pesanan', [PermintaanPesananController::class, 'index']);
     Route::get('/permintaan-pesanan/invoice', [PermintaanPesananController::class, 'invoice']);
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
-    Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
-    
-    Route::prefix('padi')->group(function(){
-        Route::controller(ProductController::class)->group(function(){
+    Route::get('/pesanan/{id}', [PesananController::class, 'invoice'])->name('pesanan.invoice');
+    Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
+
+    Route::prefix('padi')->group(function () {
+        Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'padi');
             Route::get('/detail/{id}', 'detail');
             Route::get('/checkout', 'checkout');
         });
     });
-    
-    Route::prefix('kedelai')->group(function(){
-        Route::controller(ProductController::class)->group(function(){
+
+    Route::prefix('kedelai')->group(function () {
+        Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'kedelai');
             Route::get('/detail/{id}', 'detail');
             Route::get('/checkout', 'checkout');
@@ -84,7 +85,7 @@ Route::middleware('auth')->group(function(){
     });
 });
 
-Route::controller(AuthController::class)->group(function(){
+Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index');
     Route::post('/login', 'login')->name('login');
     Route::get('/logout', 'logout');
