@@ -63,7 +63,7 @@ Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 // tambahan route
 Route::middleware('auth')->group(function () {
     Route::get('/permintaan-pesanan', [PermintaanPesananController::class, 'index']);
-    Route::get('/permintaan-pesanan/invoice', [PermintaanPesananController::class, 'invoice']);
+    Route::get('/permintaan-pesanan/invoice/{id}', [PermintaanPesananController::class, 'invoice']);
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
     Route::get('/pesanan/{id}', [PesananController::class, 'invoice'])->name('pesanan.invoice');
     Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
