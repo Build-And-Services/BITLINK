@@ -26,9 +26,9 @@
                             <div class="content">
                             </div>
                         </div>
-                        <div class="d-flex" style="margin-top:-150px">
-                            <a href="" style="background-color: #4D4AE7" class="btn btn-primary">Status Pesanan</a>
-                            <a href="{{url('permintaan-pesanan/invoice', $item->id)}}" class="btn btn-primary ml-2">Invoice</a>
+                        <div class="d-flex">
+                            <a href="{{url('detail-distribusi')}}" class="btn btn-primary">Status Pesanan</a>
+                            <a href="{{url('permintaan-pesanan/invoice')}}" class="btn btn-primary ml-2">Invoice</a>
                         </div>
 
                         <!-- Pop-up konfirmasi -->

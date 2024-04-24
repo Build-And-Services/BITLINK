@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    if (Auth::check()) {
+    if(Auth::check()){
         return view('frontend.home');
-    } else {
+    }else{
         return view('frontend.home-noauth');
     }
 })->name('home');
@@ -61,13 +61,17 @@ Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 
 
 // tambahan route
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function(){
     Route::get('/permintaan-pesanan', [PermintaanPesananController::class, 'index']);
-    Route::get('/permintaan-pesanan/invoice/{id}', [PermintaanPesananController::class, 'invoice']);
+    Route::get('/permintaan-pesanan/invoice', [PermintaanPesananController::class, 'invoice']);
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
-    Route::get('/pesanan/{id}', [PesananController::class, 'invoice'])->name('pesanan.invoice');
+    Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
     Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
-
+    Route::get('/detail-distribusi', [PermintaanPesananController::class, 'distribusi']);
+    Route::get('/track-distribusi', function () {
+        return view('produsen.distribusi.track-distribusi');
+    });
+    
     Route::prefix('padi')->group(function () {
         Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'padi');
@@ -85,7 +89,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::controller(AuthController::class)->group(function () {
+Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'index');
     Route::post('/login', 'login')->name('login');
     Route::get('/logout', 'logout');
