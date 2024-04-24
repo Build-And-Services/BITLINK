@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'padi');
             Route::get('/detail/{id}', 'detail');
-            Route::get('/checkout', 'checkout');
+            Route::get('/checkout/{id}/{quantity}', 'checkout');
         });
     });
 
@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
         Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'kedelai');
             Route::get('/detail/{id}', 'detail');
-            Route::get('/checkout', 'checkout');
+            Route::get('/checkout/{id}/{quantity}', 'checkout');
         });
     });
 });

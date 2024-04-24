@@ -42,18 +42,52 @@
               <p class="text-with-underline">Jenis: {{ $benih->jenis_benih }}</p>
               <p class="text-with-underline">Kelas Benih: {{ $benih->kualitas_benih }}</p>
 
-              <div class="quantity-control">
-                <label for="quantity" class="visually-hidden">Quantity</label>
-                <div class="input-group">
-                  <button type="button" class="btn btn-sm btn-secondary" aria-label="Decrease Quantity" onclick="decrementQuantity()">-</button>
-                  <input type="number" id="quantity" name="quantity" min="1" value="1" aria-label="Benih Quantity">
-                  <span class="input-group-text">/kg</span>
-                  <button type="button" class="btn btn-sm btn-primary" aria-label="Increase Quantity" onclick="incrementQuantity()">+</button>
+              
+              
+              @if (Auth::user()->id != $benih->id_akunp)                  
+                <div class="quantity-control">
+                  <label for="quantity" class="visually-hidden">Quantity</label>
+                  <div class="input-group">
+                    <button type="button" class="btn btn-sm btn-secondary" aria-label="Decrease Quantity" onclick="decrementQuantity()">-</button>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" aria-label="Benih Quantity">
+                    <span class="input-group-text">/kg</span>
+                    <button type="button" class="btn btn-sm btn-primary" aria-label="Increase Quantity" onclick="incrementQuantity()">+</button>
+                  </div>
                 </div>
-              </div>
+                <a href="/padi/checkout/{{ $benih->id_benih }}/1" id="pesan" class="btn btn-success" role="button" aria-disabled="true">Pesan</a>
+              @else 
+                <div class="mt-3">
+                  <a href="{{ route('BenihData.edit', $benih->id_benih) }}" class="btn btn-primary">Edit</a>
+                  <a href="#" class="btn btn-danger" id="delete-button">Delete</a>
+                  <form id="delete-form" action="{{ route('BenihData.destroy', $benih->id_benih) }}" method="POST" style="display: none;">
+                      @csrf
+                      @method('DELETE')
+                  </form>
 
+                  <!-- Pop-up konfirmasi -->
+                  <div class="confirmation-popup" id="confirmation-popup">
+                      <h2>Apakah Anda yakin akan menghapus data?</h2>
+                      <button id="confirm-delete" class="btn btn-danger">Ya</button>
+                      <button id="cancel-delete" class="btn btn-primary">Tidak</button>
+                  </div>
 
-              <a href="/padi/checkout" class="btn btn-success" role="button" aria-disabled="true">Pesan</a>
+                  <script>
+                  document.getElementById('delete-button').addEventListener('click', function(event) {
+                      event.preventDefault();
+                      document.getElementById('confirmation-popup').style.display = 'block';
+                  });
+
+                  document.getElementById('confirm-delete').addEventListener('click', function() {
+                      document.getElementById('delete-form').submit();
+                  });
+
+                  document.getElementById('cancel-delete').addEventListener('click', function() {
+                      document.getElementById('confirmation-popup').style.display = 'none';
+                  });
+                  </script>
+                </div>
+              @endif
+
             </div>
           </div>
         </div>
@@ -64,17 +98,21 @@
   <script>
   function incrementQuantity() {
     const quantityInput = document.getElementById('quantity');
+    const pesan = document.getElementById('pesan');
     let quantity = parseInt(quantityInput.value);
     quantity = Math.max(quantity + 1, 1); // Ensure minimum quantity of 1
     quantityInput.value = quantity;
+    pesan.href = "/padi/checkout/{{ $benih->id_benih }}/"+quantity;
     updateOrderButton();
   }
 
   function decrementQuantity() {
     const quantityInput = document.getElementById('quantity');
+    const pesan = document.getElementById('pesan');
     let quantity = parseInt(quantityInput.value);
     quantity = Math.max(quantity - 1, 1); // Ensure minimum quantity of 1
     quantityInput.value = quantity;
+    pesan.href = "/padi/checkout/{{ $benih->id_benih }}/"+quantity;
     updateOrderButton();
   }
 
