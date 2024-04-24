@@ -10,7 +10,7 @@ class PesananController extends Controller
 {
     public function index()
     {
-        $benihData = BenihData::all();
+        $benihData = Pesanan::with(['pembeli', 'benihData'])->latest()->get();
         return view('frontend.pesanan.index', compact('benihData'));
     }
     public function invoice($id)
@@ -67,5 +67,16 @@ class PesananController extends Controller
             return response()->json('failed');
         }
 
+    }
+
+    public function store(Request $request)
+    {
+        try{
+            Pesanan::create($request->all());
+            return redirect('/pesanan');
+        }catch (\Throwable $th) {
+            dd($th);
+            return back();
+        }
     }
 }

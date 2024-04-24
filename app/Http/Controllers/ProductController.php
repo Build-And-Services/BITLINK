@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BenihData;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

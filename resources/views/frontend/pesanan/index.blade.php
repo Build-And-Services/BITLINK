@@ -16,17 +16,17 @@
                         {{-- <h2>Detail Bibit</h2> --}}
                         <div class="single-bibit">
                             <div class="content">
-                                <h2>{{ $item->varietas }}</h2>
-                                <p class="mrh text-merah">Rp {{ $item->harga_benih }} /kg</p>
-                                <p><span
-                                        class="badge text-bg-warning bg-yellow">{{ $item->akunProdusen->nama_perusahaan }}</span>
+                                <h2>{{ $item->benihData->varietas }}</h2>
+                                <p class="mrh text-merah">Rp {{ number_format($item->harga, 0, ',', '.') }} /kg</p>
+                                <p>
+                                    {{-- <span    class="badge text-bg-warning bg-yellow">{{ $item->akunProdusen->nama_perusahaan }}</span> --}}
                                 </p>
                                 <h4>Informasi Stok Benih</h4>
-                                <p class="text-with-underline">Stok: {{ $item->stok_benih }}</p>
-                                <p class="text-with-underline">Jenis: {{ $item->jenis_benih }}</p>
-                                <p class="text-with-underline">Kelas Benih: {{ $item->kualitas_benih }}</p>
+                                <p class="text-with-underline">Stok: {{ $item->benihData->stok_benih }}</p>
+                                <p class="text-with-underline">Jenis: {{ $item->benihData->jenis_benih }}</p>
+                                <p class="text-with-underline">Kelas Benih: {{ $item->benihData->kualitas_benih }}</p>
                             </div>
-                            <a href="{{ route('pesanan.invoice', $item->id_benih) }}" style="background-color: #4D4AE7"
+                            <a href="{{ route('pesanan.invoice', $item->id) }}" style="background-color: #4D4AE7"
                                 class="btn btn-primary">Status
                                 Pesanan</a>
                         </div>

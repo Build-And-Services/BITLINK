@@ -79,7 +79,16 @@
                     </div>
                     <hr>
                     <div style="display: flex; justify-content: end;">
-                        <button class="btn btn-success">Bayar Sekarang</button>
+                        <form action="/checkout" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_benih" value="{{ $benih->id_benih }}">
+                            <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="alamat_lengkap" value="Jl. Papua">
+                            <input type="hidden" name="telepon" value="0873467345">
+                            <input type="hidden" name="quantity" value="{{ $quantity }}">
+                            <input type="hidden" name="harga" value="{{ $benih->harga_benih }}">
+                            <button class="btn btn-success">Bayar Sekarang</button>
+                        </form>
                     </div>
                 </div>
             </div>
