@@ -26,7 +26,7 @@
         <div class="col-lg-5">
           <div class="single-bibit">
             <div class="image">
-              <img src="{{ url('img/1712425584.png') }}" alt="Logawa Seeds Image">
+              <img src="{{ $benih->foto_benih }}" alt="Logawa Seeds Image">
             </div>
           </div>
         </div>
@@ -34,13 +34,13 @@
           {{-- <h2>Detail Bibit</h2> --}}
           <div class="single-bibit">
             <div class="content">
-              <h2>Logawa</h2>
-              <p class="mrh text-merah">Rp 20.000 /kg</p>
-              <p><span class="badge text-bg-warning bg-yellow">PT Logawa hwo aini</span></p>
+              <h2>{{ $benih->varietas }}</h2>
+              <p class="mrh text-merah">Rp {{ $benih->harga_benih }} /kg</p>
+              <p><span class="badge text-bg-warning bg-yellow">{{ $benih->akunProdusen->dataProdusen->nama_perusahaan }}</span></p>
               <h4>Informasi Stok Benih</h4>
-              <p class="text-with-underline">Stok: 20</p>
-              <p class="text-with-underline">Jenis: Padi</p>
-              <p class="text-with-underline">Kelas Benih: A</p>
+              <p class="text-with-underline">Stok: {{ $benih->stok_benih }}</p>
+              <p class="text-with-underline">Jenis: {{ $benih->jenis_benih }}</p>
+              <p class="text-with-underline">Kelas Benih: {{ $benih->kualitas_benih }}</p>
 
               <div class="quantity-control">
                 <label for="quantity" class="visually-hidden">Quantity</label>

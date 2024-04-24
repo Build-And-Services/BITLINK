@@ -49,6 +49,6 @@ class User extends Authenticatable
 
     public function dataProdusen()
     {
-        return $this->belongsTo(DataAkunProdusen::class, 'id_user', 'id');
+        return $this->hasOne(DataAkunProdusen::class, 'id_user', 'id');
     }
 }

@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
         $benih = BenihData::create([
             'varietas' => 'Logawa',
-            'jenis_benih' => 'Kedelai',
+            'jenis_benih' => 'kedelai',
             'stok_benih' => 150,
             'kualitas_benih' => 'Benih Pokok',
             'harga_benih' => 10000,
@@ -65,8 +65,24 @@ class DatabaseSeeder extends Seeder
             'benih_susut' => 10,
             'biji_kecil' => 10,
             'jumlah_benih' => 10,
-            'id_akunp' => $user->id
+            'id_akunp' => $userProdusen->id
         ]);
 
+        $benih = BenihData::create([
+            'varietas' => 'Logawa',
+            'jenis_benih' => 'padi',
+            'stok_benih' => 150,
+            'kualitas_benih' => 'Benih Pokok',
+            'harga_benih' => 10000,
+            'foto_benih' => url("/img/benih/{$image}"),
+            'tgl_masuk' => now(),
+            'turun_gudang' => 10,
+            'jemur_kering' => 10,
+            'blower1' => 10,
+            'benih_susut' => 10,
+            'biji_kecil' => 10,
+            'jumlah_benih' => 10,
+            'id_akunp' => $userProdusen->id
+        ]);
     }
 }

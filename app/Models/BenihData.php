@@ -30,6 +30,6 @@ class BenihData extends Model
 
     public function akunProdusen()
     {
-        return $this->belongsTo(DataAkunProdusen::class, 'id_akunp', 'id_akunp');
+        return $this->belongsTo(User::class, 'id_akunp', 'id');
     }
 }
