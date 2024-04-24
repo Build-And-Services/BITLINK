@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\BenihData;
 use App\Models\DataAkunProdusen;
 use App\Models\DataMitra;
+use App\Models\Pesanan;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Carbon\Carbon;

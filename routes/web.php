@@ -66,21 +66,22 @@ Route::middleware('auth')->group(function(){
     Route::get('/permintaan-pesanan/invoice', [PermintaanPesananController::class, 'invoice']);
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
     Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
+    Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
     Route::get('/detail-distribusi', [PermintaanPesananController::class, 'distribusi']);
     Route::get('/track-distribusi', function () {
         return view('produsen.distribusi.track-distribusi');
     });
     
-    Route::prefix('padi')->group(function(){
-        Route::controller(ProductController::class)->group(function(){
+    Route::prefix('padi')->group(function () {
+        Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'padi');
             Route::get('/detail/{id}', 'detail');
             Route::get('/checkout', 'checkout');
         });
     });
-    
-    Route::prefix('kedelai')->group(function(){
-        Route::controller(ProductController::class)->group(function(){
+
+    Route::prefix('kedelai')->group(function () {
+        Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'kedelai');
             Route::get('/detail/{id}', 'detail');
             Route::get('/checkout', 'checkout');

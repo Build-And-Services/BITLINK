@@ -14,6 +14,15 @@ class Pesanan extends Model
 
     public function pembeli()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(DataAkunProdusen::class, 'id_user', 'id');
+    }
+    public function benih()
+    {
+        return $this->belongsTo(BenihData::class, 'id_benih', 'id_benih');
+    }
+
+    public function benihData()
+    {
+        return $this->belongsTo(BenihData::class, 'id_benih', 'id_benih');
     }
 }

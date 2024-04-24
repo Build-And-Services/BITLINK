@@ -30,4 +30,8 @@ class DataAkunProdusen extends Model
     {
         return $this->belongsTo(DataMitra::class, 'id_kemitraan');
     }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id_user');
+    }
 }

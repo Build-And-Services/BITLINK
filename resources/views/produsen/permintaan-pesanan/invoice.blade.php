@@ -75,7 +75,7 @@
                   </div>
                   <div class="" style="margin-left: 100px">
                     <div class="text-center">
-                        <img src="{{asset('/img/bitlink.png')}}" alt="">
+                        <img src="{{asset('img/bitlink.png')}}" alt="">
                     </div>
                   </div>
 
@@ -93,16 +93,16 @@
                       <ul class="list-unstyled">
                         <li class="text-dark text-uppercase "><span style="font-size:30px;font-weight:600">Invoice</span></li>
                         <li class="text-dark ">Billed to </li>
-                        <li class="text-dark text-uppercase">Kardika Kresna</li>
-                        <li class="text-dark text-uppercase"> Nganjuk, Jawa Timur </li>
+                        <li class="text-dark text-uppercase">{{$getDetailInvoice->pembeli->name}}</li>
+                        <li class="text-dark text-uppercase">{{$getDetailInvoice->alamat}}</li>
                       </ul>
                     </div>
                     <div class="col-xl-4 mt-3 text-lg-end" style="text-align: end">
                       <img style="width: 200px;height:100px;margin-right:-13px" src="{{asset('/img/bitlink.png')}}"/>
                       <div class="" style="text-align: end;margin-right:4px">
-                          <p class=" text-lg-end">Business address</p>
-                          <p class=" text-lg-end">City, State, IN - 000-000 </p>
-                          <p class=" text-lg-end">TAX ID - 199999</p>
+                          <p class=" text-lg-end">{{$getPerusahaan->nama_perusahaan}}</p>
+                          <p class=" text-lg-end">{{$getPerusahaan->alamat_lengkap}}</p>
+                          <p class=" text-lg-end">{{$getPerusahaan->nomor_legalitas_usaha}}</p>
 
                       </div>
                     </div>
@@ -111,13 +111,13 @@
                   <div class="row my-2 justify-content-between">
                       <div class="col-2">
                         <p class="" style="font-weight: bold">Invoice #</p>
-                        <p style="font-style: italic">ID PEMBAYARAN</p>
+                        <p style="font-style: italic">11786643</p>
                         <br>
                         <br>
                         <br>
                         <br>
                         <p class="" style="font-weight: bold">Invoice Date</p>
-                        <p style="font-style: italic">01 April, 2024</p>
+                        <p style="font-style: italic">{{$getDetailInvoice->created_at->format('d M Y')}}</p>
                         <br>
                         <br>
                         <br>
@@ -128,7 +128,7 @@
                         <br>
                         <br>
                         <p class="" style="font-weight: bold">Status</p>
-                        <p style="font-style: italic">-</p>
+                        <p style="font-style: italic">{{$getDetailInvoice->status_pembayaran}}</p>
                         <br>
                         <br>
                         <br>
@@ -148,40 +148,10 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <td>INPARI 42</td>
+                                <td>{{$getDetailInvoice->benihData->varietas}}</td>
                                 <td>4</td>
                                 <td>$200</td>
                                 <td>$800</td>
-                              </tr>
-                              <tr>
-                                <td>INPARI 45</td>
-                                <td>8</td>
-                                <td>$500</td>
-                                <td>$4000</td>
-                              </tr>
-                              <tr>
-                                <td>INPARI 47</td>
-                                <td>2</td>
-                                <td>$100</td>
-                                <td>$200</td>
-                              </tr>
-                              <tr>
-                                <td>INPARI 47</td>
-                                <td>2</td>
-                                <td>$100</td>
-                                <td>$200</td>
-                              </tr>
-                              <tr>
-                                <td>INPARI 47</td>
-                                <td>2</td>
-                                <td>$100</td>
-                                <td>$200</td>
-                              </tr>
-                              <tr>
-                                <td>INPARI 47</td>
-                                <td>2</td>
-                                <td>$100</td>
-                                <td>$200</td>
                               </tr>
                               <tr>
                                 <td class="text-primary">Total Pembayaran</td>
