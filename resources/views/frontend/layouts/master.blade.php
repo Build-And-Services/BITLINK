@@ -120,7 +120,9 @@
 											<li><a href="#">Profil </a></li>
 											<li><a href="#">Monitoring dan Edukasi </a></li>
 											<li><a href="{{ route('pesanan.index') }}">Pesanan </a></li>
-											<li><a href="{{url('/permintaan-pesanan')}}">Permintaan Pesanan </a></li>
+											@if (Auth::user()->role == 'PRODUSEN')
+												<li><a href="{{url('/permintaan-pesanan')}}">Permintaan Pesanan </a></li>
+											@endif
                                             <div class="get-quote">
                                                 <a href="/logout" class="btn">LOG OUT</a>
                                             </div>

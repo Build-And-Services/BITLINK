@@ -2,16 +2,20 @@
 @section('content')
 <link rel="stylesheet" href={{asset("css/display.css")}}>
 {{-- <script src="{{ asset('js/display.js') }}"></script> --}}
-{{-- <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<button class="btn btn-primary" style="margin-top: 30px";><a href="{{ url('/pages/tambah') }}" style="color: white; text-decoration: none;">Tambah Produk</a></button>
-		</div>
-	</div>
-</div> --}}
-		<!-- Display Bibit -->
+<!-- Display Bibit -->
 		<section class="display-bibit section">
-			<div class="container">
+			@if (Auth::user()->role == 'PRODUSEN')				
+				<div class="container mt-3">
+					<div class="row">
+						<div class="col-md-12 px-4">
+							<a href="/padi/tambah" class="btn btn-success">
+								Tambah Data
+							</a>
+						</div>
+					</div>
+				</div>
+			@endif
+			<div class="container mt-3">
 				<div class="row">
 					@foreach ($benih as $item)						
 						<div class="col-lg-4 col-md-6 col-12">
