@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BenihDataController;
 use App\Http\Controllers\DataPencatatanController;
+use App\Http\Controllers\PermintaanPesananController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,8 +59,31 @@ Route::get('/benih_data/{id}/pertanian', [BenihDataController::class, 'detailper
 
 Route::post('/pesan/{id}', 'BenihDataController@pesan')->name('frontend.pesan');
 
-require __DIR__ . '/rafi.php';
 
+// tambahan route
+Route::get('/permintaan-pesanan', [PermintaanPesananController::class, 'index']);
+Route::get('/permintaan-pesanan/invoice', [PermintaanPesananController::class, 'invoice']);
+Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
+Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
 
-include __DIR__ . '/faisal.php';
-require __DIR__."/heri.php";
+Route::prefix('padi')->group(function(){
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('/', 'padi');
+        Route::get('/detail', 'detail');
+        Route::get('/checkout', 'checkout');
+    });
+});
+
+Route::prefix('kedelai')->group(function(){
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('/', 'kedelai');
+        Route::get('/detail', 'detail');
+        Route::get('/checkout', 'checkout');
+    });
+});
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'index');
+    Route::post('/login', 'login');
+    Route::get('/logout', 'logout');
+});
