@@ -22,7 +22,7 @@
                             <p class="text-with-underline">Kelas    : Benih Dasar (CB)</p>
                         </div>
                         <div class="d-flex">
-                            <a href="" class="btn btn-primary">Status Pesanan</a>
+                            <a href="{{url('detail-distribusi')}}" class="btn btn-primary">Status Pesanan</a>
                             <a href="{{url('permintaan-pesanan/invoice')}}" class="btn btn-primary ml-2">Invoice</a>
                         </div>
 

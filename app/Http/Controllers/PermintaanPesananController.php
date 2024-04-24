@@ -26,4 +26,15 @@ class PermintaanPesananController extends Controller
             return redirect()->back()->withError($e->getMessage());
         }
     }
+
+    public function distribusi()
+    {
+        try {
+            return view('produsen.distribusi.detail-distribusi');
+        } catch (\Throwable $e) {
+            return redirect()->back()->withError($e->getMessage());
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
+    }
 }
