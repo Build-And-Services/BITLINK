@@ -85,5 +85,14 @@ class DatabaseSeeder extends Seeder
             'jumlah_benih' => 10,
             'id_akunp' => $userProdusen->id
         ]);
+
+        $pesanan = Pesanan::create([
+            'id_benih' => $benih->id_benih,
+            'id_user' => $user->id,
+            'quantity' => 10,
+            'harga' => 50000,
+            'alamat_lengkap' => 'Jl. Papua',
+            'telepon' => '082318471623',
+        ]);
     }
 }
