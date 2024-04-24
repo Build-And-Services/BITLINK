@@ -14,7 +14,7 @@ return new class extends Migration
             $table->text('judul_edukasi')->charset('utf8mb4')->collation('utf8mb4_general_ci');
             $table->text('isi_edukasi')->charset('utf8mb4')->collation('utf8mb4_general_ci');
             $table->unsignedBigInteger('id_akunp');
-            $table->foreign('id_akunp')->references('id_akunp')->on('data_akun_produsen')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_akunp')->references('id')->on('data_akun_produsen')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

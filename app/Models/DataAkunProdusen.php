@@ -11,19 +11,20 @@ class DataAkunProdusen extends Model
 
     protected $table = 'data_akun_produsen';
 
-    protected $primaryKey = 'id_akunp';
+    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 
-    protected $fillable = [
-        'nama_pemilik',
-        'nama_perusahaan',
-        'nomor_legalitas_usaha',
-        'alamat_lengkap',
-        'email',
-        'telepon',
-        'username',
-        'password',
-        'id_kemitraan',
-    ];
+    // protected $fillable = [
+    //     'nama_pemilik',
+    //     'nama_perusahaan',
+    //     'nomor_legalitas_usaha',
+    //     'alamat_lengkap',
+    //     'email',
+    //     'telepon',
+    //     'username',
+    //     'password',
+    //     'id_kemitraan',
+    // ];
 
     public function kemitraan()
     {

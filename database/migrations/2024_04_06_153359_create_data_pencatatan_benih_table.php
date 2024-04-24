@@ -24,10 +24,10 @@ class CreateDataPencatatanBenihTable extends Migration
             $table->integer('biji_kecil');
             $table->integer('jumlah_benih');
             $table->unsignedBigInteger('id_akunp');
-            $table->foreign('id_akunp')->references('id_akunp')->on('data_akun_produsen')->onDelete('restrict')->onUpdate('cascade');            
+            $table->foreign('id_akunp')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
-    }    
+    }
 
     public function down()
     {
