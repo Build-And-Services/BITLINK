@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BenihData;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function padi(){
         // get benih data jenis padi
-        return view('frontend.product.index');
+        $benih = BenihData::where('jenis_benih', 'padi')->get();
+        return view('frontend.product.index', compact('benih'));
     }
     
     public function kedelai(){
         // get benih data jenis kedelai
-        return view('frontend.product.index');
+        $benih = BenihData::where('jenis_benih', 'kedelai')->get();
+        return view('frontend.product.index', compact('benih'));
     }
     
     public function detail($id){
         // get benih data detail id
-        return view('frontend.product.detail');
+        $benih = BenihData::with(['akunProdusen' => function($query) {
+            $query->with('dataProdusen');
+        }])->where('id_benih', $id)->first();
+        // dd($benih);
+        return view('frontend.product.detail', compact('benih'));
     }
 
     public function checkout(){

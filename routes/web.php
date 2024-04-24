@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix('padi')->group(function(){
         Route::controller(ProductController::class)->group(function(){
             Route::get('/', 'padi');
-            Route::get('/detail', 'detail');
+            Route::get('/detail/{id}', 'detail');
             Route::get('/checkout', 'checkout');
         });
     });
@@ -78,7 +78,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix('kedelai')->group(function(){
         Route::controller(ProductController::class)->group(function(){
             Route::get('/', 'kedelai');
-            Route::get('/detail', 'detail');
+            Route::get('/detail/{id}', 'detail');
             Route::get('/checkout', 'checkout');
         });
     });
