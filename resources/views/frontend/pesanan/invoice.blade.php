@@ -217,7 +217,43 @@
     </div>
     <!-- jquery Min JS -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        $('#btn-acc').on('click', function(e) {
+            Swal.fire({
+                title: "Apakah anda yakin?",
+                icon: "question",
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak",
+                showCancelButton: true,
+                showCloseButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id_pembayaran_result = $('#id_pembayaran_result').val();
+
+                    $.ajax({
+                        url: "{{ route('pesanan.updateStatusPengiriman') }}",
+                        method: "PUT",
+                        data: {
+                            id_pembayaran_result: id_pembayaran_result,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            $('#status_pengiriman div span').removeClass(
+                                'badge-success badge-warning badge-danger badge-info');
+                            $('#status_pengiriman div span').text(response.status_pengiriman);
+                            $('#status_pengiriman div span').addClass('badge-success');
+                            $('#btn-acc').css('display', 'none');
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error)
+                        }
+                    })
+                }
+            })
+        })
+    </script>
     <script>
         $(document).ready(function() {
             $('#cek-pengiriman').on('click', function(e) {
@@ -264,29 +300,29 @@
                 });
             });
 
-            $('#btn-acc').on('click', function(e) {
-                e.preventDefault();
-                var id_pembayaran_result = $('#id_pembayaran_result').val();
+            // $('#btn-acc').on('click', function(e) {
+            //     e.preventDefault();
+            //     var id_pembayaran_result = $('#id_pembayaran_result').val();
 
-                $.ajax({
-                    url: "{{ route('pesanan.updateStatusPengiriman') }}",
-                    method: "PUT",
-                    data: {
-                        id_pembayaran_result: id_pembayaran_result,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        $('#status_pengiriman div span').removeClass(
-                            'badge-success badge-warning badge-danger badge-info');
-                        $('#status_pengiriman div span').text(response.status_pengiriman);
-                        $('#status_pengiriman div span').addClass('badge-success');
-                        $('#btn-acc').css('display', 'none');
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error)
-                    }
-                })
-            })
+            //     $.ajax({
+            //         url: "{{ route('pesanan.updateStatusPengiriman') }}",
+            //         method: "PUT",
+            //         data: {
+            //             id_pembayaran_result: id_pembayaran_result,
+            //             _token: '{{ csrf_token() }}'
+            //         },
+            //         success: function(response) {
+            //             $('#status_pengiriman div span').removeClass(
+            //                 'badge-success badge-warning badge-danger badge-info');
+            //             $('#status_pengiriman div span').text(response.status_pengiriman);
+            //             $('#status_pengiriman div span').addClass('badge-success');
+            //             $('#btn-acc').css('display', 'none');
+            //         },
+            //         error: function(xhr, status, error) {
+            //             console.log(error)
+            //         }
+            //     })
+            // })
         });
     </script>
     <!-- jquery Migrate JS -->
