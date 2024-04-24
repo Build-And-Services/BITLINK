@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pesanan/{id}', [PesananController::class, 'invoice'])->name('pesanan.invoice');
     Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
     Route::put('/pesanan/status-pengiriman', [PesananController::class, 'updateStatusPengiriman'])->name('pesanan.updateStatusPengiriman');
+    Route::post('/checkout', [PesananController::class, 'store']);
     Route::get('/detail-distribusi', [PermintaanPesananController::class, 'distribusi']);
     Route::get('/track-distribusi', function () {
         return view('produsen.distribusi.track-distribusi');
@@ -75,7 +76,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/checkout/{id}/{quantity}', 'checkout');
         });
     });
-
+    
     Route::prefix('kedelai')->group(function () {
         Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'kedelai');
