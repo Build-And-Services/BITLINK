@@ -27,8 +27,13 @@
                                 <p class="text-with-underline">Kelas Benih: {{ $item->kualitas_benih }}</p>
                             </div>
                             <a href="{{ route('pesanan.invoice', $item->id) }}" style="background-color: #4D4AE7"
-                                class="btn btn-primary">Status
+                                class="btn btn-primary text-white">Status
                                 Pesanan</a>
+                            @if ($item->status_pembayaran == 'BELUM DIBAYAR')
+                                <button onclick="bayar({{ $item->id }}, '{{ $item->snap_token }}')"
+                                    id="pay-button-{{ $item->id }}" class="btn btn-primary">Bayar
+                                    Sekarang</button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -36,4 +41,34 @@
         </section>
     @endforeach
     <script src="{{ asset('js/detail.js') }}"></script>
+    <script type="text/javascript">
+        function bayar(id, token) {
+            var payButton = document.getElementById(`pay-button-${id}`);
+            if (!token) {
+                alert('token tidak ada')
+                return
+            }
+            window.snap.pay(token, {
+                onSuccess: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment success!");
+                    console.log(result);
+                },
+                onPending: function(result) {
+                    /* You may add your own implementation here */
+                    alert("wating your payment!");
+                    console.log(result);
+                },
+                onError: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!");
+                    console.log(result);
+                },
+                onClose: function() {
+                    /* You may add your own implementation here */
+                    alert('you closed the popup without finishing the payment');
+                }
+            })
+        }
+    </script>
 @endsection
