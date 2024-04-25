@@ -68,6 +68,7 @@
         </div>
         <!-- End Preloader -->
         <main>
+
             <section>
                 <div class="card">
                     <div class="card-body">
@@ -91,36 +92,54 @@
                 <div class="container">
                     <div class="col-lg-6 col-sm-12 mx-auto">
                         <h5 class="font-weight-bold mb-3 text-center">Form Track Distribusi</h5>
-                        <form>
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        <form action="{{ route('track.distribusi.update', $distribusiPesanan->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $distribusiPesanan->id }}">
                             <div class="mb-3">
                                 <label for="pembayaranID" class="form-label">ID Pembayaran</label>
-                                <input type="text" class="form-control" id="pembayaranID"
+                                <input type="text" disabled class="form-control" id="pembayaranID"
                                     value="{{ $distribusiPesanan->id }}" />
                             </div>
                             <div class="mb-3">
                                 <label for="NamaPembeli" class="form-label">Nama Pembeli</label>
-                                <input type="text" class="form-control" id="NamaPembeli"
+                                <input type="text" disabled class="form-control" id="NamaPembeli"
                                     value="{{ $distribusiPesanan->pembeli->name }}">
                             </div>
                             <div class="mb-3">
                                 <label for="alamatPembeli" class="form-label">Alamat Pembeli</label>
-                                <input type="text" class="form-control" id="alamatPembeli"
+                                <input type="text" disabled class="form-control" id="alamatPembeli"
                                     value="{{ $distribusiPesanan->alamat_lengkap }}">
                             </div>
                             <div class="mb-3">
                                 <label for="totalPembayaran" class="form-label">Total Pembayaran</label>
-                                <input type="text" class="form-control" id="totalPembayaran"
+                                <input type="text" disabled class="form-control" id="totalPembayaran"
                                     value="{{ $distribusiPesanan->harga * $distribusiPesanan->quantity }}" />
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalPembelian" class="form-label">Tanggal Pembelian</label>
-                                <input type="text" class="form-control" id="tanggalPembelian"
+                                <input type="text" disabled class="form-control" id="tanggalPembelian"
                                     value="{{ $distribusiPesanan->created_at->format('d M Y') }}">
                             </div>
                             <div class="input-group d-block mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select class="form-select w-100" style="background-color: black" aria-label=""
-                                    name="status" id="status">
+                                    name="status_pengiriman" id="status_pengiriman"
+                                    {{ $distribusiPesanan->status_pengiriman == 'DITERIMA' ? 'disabled' : '' }}>
                                     @foreach (['PROSES', 'SEDANG DIKIRIM', 'DITERIMA'] as $value)
                                         <option value="{{ $value }}"
                                             {{ $value == $distribusiPesanan->status_pengiriman ? 'selected' : '' }}>
@@ -129,8 +148,8 @@
                                 </select>
                             </div>
                             <div class="w-75 mx-auto mt-5">
-                                <a href="{{ url('track-distribusi') }}" style="color: #fff"
-                                    class="btn-primary w-100 mb-5 mt-5">Simpan</a>
+                                <button type="submit" style="color: #fff"
+                                    class="btn-primary w-100 mb-5 mt-5">Simpan</button>
                             </div>
                         </form>
                     </div>

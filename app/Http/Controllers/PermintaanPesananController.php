@@ -76,4 +76,20 @@ class PermintaanPesananController extends Controller
             return redirect()->back()->withError($e->getMessage());
         }
     }
+
+    public function updateStatusPengiriman(Request $request, $id) {
+        try {
+            $request->validate([
+                'status_pengiriman' => 'required|in:PROSES,SEDANG DIKIRIM,DITERIMA',
+            ]);
+            $pesanan = Pesanan::with('benihData', 'pembeli')->where('id', $id)->first();
+            $pesanan->status_pengiriman = $request->status_pengiriman;
+            $pesanan->save();
+            return redirect()->route('track.distribusi', $pesanan->id)->with('success', 'STatus Pengiriman Berhasil di Perbarui');
+        } catch (\Throwable $e) {
+            return redirect()->back()->withError($e->getMessage());
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
+    }
 }
