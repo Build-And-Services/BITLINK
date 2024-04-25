@@ -8,13 +8,13 @@
 		<meta name="description" content="">
 		<meta name='copyright' content=''>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		
+
 		<!-- Title -->
         <title>Bitlink-Nganjuk Nyawiji Mbangun Desa Noto Khuto.</title>
-		
+
 		<!-- Favicon -->
         <link rel="icon" href="img/bitlink.png">
-		
+
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
@@ -36,24 +36,24 @@
         <link rel="stylesheet" href={{asset("css/animate.min.css")}}>
 		<!-- Magnific Popup CSS -->
         <link rel="stylesheet" href={{asset("css/magnific-popup.css")}}>
-		
+
 		<!-- Medipro CSS -->
         <link rel="stylesheet" href={{asset("/css/normalize.css")}}>
         <link rel="stylesheet" href={{asset("style.css")}}>
         <link rel="stylesheet" href={{asset("css/responsive.css")}}>
-		
+
 		{{-- <link rel="stylesheet" href={{asset("css/detail.css")}}> --}}
-		
+
     </head>
     <body style="overflow: hidden;">
-	
+
 		<!-- Preloader -->
         <div class="preloader">
             <div class="loader">
                 <div class="loader-outter"></div>
                 <div class="loader-inner"></div>
 
-                <div class="indicator"> 
+                <div class="indicator">
                     <svg width="16px" height="12px">
                         <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
                         <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
@@ -62,20 +62,27 @@
             </div>
         </div>
         <!-- End Preloader -->
-	
+
 		<!-- Header Area -->
 		<nav class="bg-white container py-2">
 			<div class="row justify-content-end">
-				<div class="col-md-4 row align-items-center">
-					<p class="col">Bahasa Indonesia</p>
+				<div class=" row align-items-center">
+                    <div class="form-group mr-2" style="border:none;margin-top:32px">
+                        <select class="form-select" aria-label="Default select example" id="jenis_benih" name="jenis_benih" required>
+                            <option value="" selected>Bahasa Indonesia</option>
+                            <option value="">Bahasa Inggris</option>
+                        </select>
+                    </div>
+
 					<a href="/login" class="col btn btn-success text-white">Login</a>
+					<a href="/register" class="col btn btn-success ml-2 text-white">Register</a>
 				</div>
 			</div>
 		</nav>
 		<!-- End Header Area -->
 
 		@yield('content')
-		
+
 		<!-- jquery Min JS -->
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
 		<!-- jquery Migrate JS -->

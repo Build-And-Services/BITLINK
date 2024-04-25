@@ -17,6 +17,8 @@
 
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/29d4f5ffc9.js" crossorigin="anonymous"></script>
+
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href={{asset("css/bootstrap.min.css")}}>
@@ -88,7 +90,8 @@
 							<!-- Top Contact -->
 							<ul class="top-contact">
 								<li><i class="fa fa-phone"></i>+880 1234 56789</li>
-								<li><i class="fa fa-envelope"></i><a href="mailto:support@yourmail.com">support@yourmail.com</a></li>
+								<li><i class="fa fa-envelope"></i><a href="mailto:support@yourmail.com">{{Auth::user()->email}}</a></li>
+								<li><i class="fa fa-user"></i><a href="">{{Auth::user()->username}}</a></li>
 							</ul>
 							<!-- End Top Contact -->
 						</div>

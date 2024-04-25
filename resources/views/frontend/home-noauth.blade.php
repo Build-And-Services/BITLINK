@@ -6,13 +6,13 @@
 			<div class="col-md-7 rounded p-3" style="height: 80%; background-color: rgba(255, 255, 255, 0.3)">
 				<img src="{{ url('/img/1712070101.png') }}" width="200" alt="">
 				<p class="mx-3">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis maximus nunc, ac rhoncus odio congue quis. Sed ac semper orci, eu porttitor lacus. 
+					"Jaminan Hasil Terbaik: Temukan Benih Padi dan Kedelai Pilihan Anda. Mulai Petani Modernmu di Sini: Benih Padi dan Kedelai Berkualitas Tinggi. Keberlanjutan dari Tanah ke Meja: Benih Padi dan Kedelai Organik Tersedia"
 				</p>
 			</div>
 		</div>
 	</div>
 </div>
-@endsection	
+@endsection
 
 
 
