@@ -20,9 +20,12 @@ class PesananController extends Controller
                 'benih_data.stok_benih AS stok_benih',
                 'benih_data.jenis_benih AS jenis_benih',
                 'benih_data.kualitas_benih AS kualitas_benih',
+                'pesanan.snap_token AS snap_token',
+                'pesanan.status_pembayaran AS status_pembayaran'
             )
             ->join('benih_data', 'pesanan.id_benih', '=', 'benih_data.id_benih')
             ->join('data_akun_produsen', 'benih_data.id_akunp', '=', 'data_akun_produsen.id_user')
+            ->where('pesanan.id_user', \Auth::user()->id)
             ->orderBy('id', 'desc')
             ->get();
         return view('frontend.pesanan.index', compact('pesanan'));
@@ -87,7 +90,6 @@ class PesananController extends Controller
     {
         try {
             $pesanan = Pesanan::create($request->all());
-
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
             // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
             \Midtrans\Config::$isProduction = false;
@@ -102,14 +104,16 @@ class PesananController extends Controller
                     'gross_amount' => $request->quantity * $request->harga,
                 ),
                 'customer_details' => array(
-                    'first_name' => 'budi',
-                    'last_name' => 'pratama',
-                    'email' => 'budi.pra@example.com',
-                    'phone' => '08111222333',
+                    'name' => \Auth::user()->name,
+                    'email' => \Auth::user()->email,
+                    'phone' => $request->telepon,
                 ),
             );
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $pesanan->snap_token = $snapToken;
+            $pesanan->save();
+
             $benih = BenihData::with([
                 'akunProdusen' => function ($query) {
                     $query->with('dataProdusen');
