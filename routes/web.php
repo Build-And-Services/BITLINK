@@ -62,9 +62,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
     Route::get('/pesanan/{id}', [PesananController::class, 'invoice'])->name('pesanan.invoice');
     Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
+    Route::get('/detail-distribusi/{id}', [PermintaanPesananController::class, 'distribusi'])->name('distribusi.pesanan');
     Route::put('/pesanan/status-pengiriman', [PesananController::class, 'updateStatusPengiriman'])->name('pesanan.updateStatusPengiriman');
     Route::post('/checkout', [PesananController::class, 'store']);
-    Route::get('/detail-distribusi', [PermintaanPesananController::class, 'distribusi']);
     Route::get('/track-distribusi', function () {
         return view('produsen.distribusi.track-distribusi');
     });
