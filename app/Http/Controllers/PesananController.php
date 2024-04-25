@@ -10,8 +10,22 @@ class PesananController extends Controller
 {
     public function index()
     {
-        $benihData = Pesanan::with(['pembeli', 'benihData'])->latest()->get();
-        return view('frontend.pesanan.index', compact('benihData'));
+        $pesanan = \DB::table('pesanan')
+            ->select(
+                'pesanan.id AS id',
+                'benih_data.foto_benih AS foto_benih',
+                'benih_data.varietas AS varietas',
+                'pesanan.harga AS harga',
+                'data_akun_produsen.nama_perusahaan AS nama_perusahaan',
+                'benih_data.stok_benih AS stok_benih',
+                'benih_data.jenis_benih AS jenis_benih',
+                'benih_data.kualitas_benih AS kualitas_benih',
+            )
+            ->join('benih_data', 'pesanan.id_benih', '=', 'benih_data.id_benih')
+            ->join('data_akun_produsen', 'benih_data.id_akunp', '=', 'data_akun_produsen.id_user')
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('frontend.pesanan.index', compact('pesanan'));
     }
     public function invoice($id)
     {
@@ -71,9 +85,9 @@ class PesananController extends Controller
 
     public function store(Request $request)
     {
-        try{
+        try {
             $pesanan = Pesanan::create($request->all());
-            
+
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
             // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
             \Midtrans\Config::$isProduction = false;
@@ -96,11 +110,13 @@ class PesananController extends Controller
             );
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-            $benih = BenihData::with(['akunProdusen' => function($query) {
-                $query->with('dataProdusen');
-            }])->where('id_benih', $pesanan->id_benih)->first();
+            $benih = BenihData::with([
+                'akunProdusen' => function ($query) {
+                    $query->with('dataProdusen');
+                }
+            ])->where('id_benih', $pesanan->id_benih)->first();
             return view('frontend.pesanan.checkout', compact('pesanan', 'benih', 'snapToken'));
-        }catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             dd($th);
             return back();
         }
