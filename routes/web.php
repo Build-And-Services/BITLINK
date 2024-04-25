@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/permintaan-pesanan/invoice/{id}', [PermintaanPesananController::class, 'invoice']);
     Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan.index');
     Route::get('/pesanan/{id}', [PesananController::class, 'invoice'])->name('pesanan.invoice');
+    Route::get('/pesanan/riwayat/{id}', [PesananController::class, 'riwayat'])->name('pesanan.riwayat');
     Route::post('/pesanan/cek-pengiriman', [PesananController::class, 'cekPengiriman'])->name('pesanan.cekPengiriman');
     Route::get('/detail-distribusi/{id}', [PermintaanPesananController::class, 'distribusi'])->name('distribusi.pesanan');
     Route::put('/pesanan/status-pengiriman', [PesananController::class, 'updateStatusPengiriman'])->name('pesanan.updateStatusPengiriman');

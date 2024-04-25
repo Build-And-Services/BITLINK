@@ -11,7 +11,7 @@ class PermintaanPesananController extends Controller
     public function index()
     {
         try {
-            $pesanan = Pesanan::with('benihData', 'pembeli')->get();
+            $pesanan = Pesanan::with('benihData', 'pembeli')->latest()->get();
             return view('produsen.permintaan-pesanan.index',
             [
                 'getPermintaanPesanan' => $pesanan
@@ -84,6 +84,7 @@ class PermintaanPesananController extends Controller
             ]);
             $pesanan = Pesanan::with('benihData', 'pembeli')->where('id', $id)->first();
             $pesanan->status_pengiriman = $request->status_pengiriman;
+            $pesanan->tgl_pengiriman = now();
             $pesanan->save();
             return redirect()->route('track.distribusi', $pesanan->id)->with('success', 'STatus Pengiriman Berhasil di Perbarui');
         } catch (\Throwable $e) {

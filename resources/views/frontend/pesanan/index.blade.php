@@ -29,6 +29,9 @@
                             <a href="{{ route('pesanan.invoice', $item->id) }}" style="background-color: #4D4AE7"
                                 class="btn btn-primary text-white">Status
                                 Pesanan</a>
+                            <a href="{{ route('pesanan.riwayat', $item->id) }}" style="background-color: #4D4AE7"
+                                class="btn btn-primary text-white">Riwayat
+                                Pesanan</a>
                             @if ($item->status_pembayaran == 'BELUM DIBAYAR')
                                 <button onclick="bayar({{ $item->id }}, '{{ $item->snap_token }}')"
                                     id="pay-button-{{ $item->id }}" class="btn btn-primary">Bayar
