@@ -135,7 +135,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <a href="{{ url('track-distribusi') }}" style="color: #fff"
+                                <a href="{{ route('track.distribusi', $getDetailDistribusi->id) }}" style="color: #fff"
                                     class="btn-primary">Track
                                     Distribusi </a>
                             </form>

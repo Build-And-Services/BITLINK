@@ -64,4 +64,16 @@ class PermintaanPesananController extends Controller
             return redirect()->back()->withError($e->getMessage());
         }
     }
+
+    public function trackDistribusi($id) {
+        try {
+            $pesanan = Pesanan::with('benihData', 'pembeli')->where('id', $id)->first();
+            // dd($pesanan->status_pengiriman);
+            return view('produsen.distribusi.track-distribusi', ['distribusiPesanan' => $pesanan]);
+        } catch (\Throwable $e) {
+            return redirect()->back()->withError($e->getMessage());
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
+    }
 }
