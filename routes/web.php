@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/pesanan/status-pengiriman', [PesananController::class, 'updateStatusPengiriman'])->name('pesanan.updateStatusPengiriman');
     Route::post('/checkout', [PesananController::class, 'store']);
     Route::get('/track-distribusi/{id}', [PermintaanPesananController::class, 'trackDistribusi'])->name('track.distribusi');
+    Route::put('/update-track-distribusi/{id}', [PermintaanPesananController::class, 'updateStatusPengiriman'])->name('track.distribusi.update');
 
     Route::prefix('padi')->group(function () {
         Route::controller(ProductController::class)->group(function () {
