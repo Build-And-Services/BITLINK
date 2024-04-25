@@ -72,8 +72,34 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         try{
-            Pesanan::create($request->all());
-            return redirect('/pesanan');
+            $pesanan = Pesanan::create($request->all());
+            
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = false;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $pesanan->id,
+                    'gross_amount' => $request->quantity * $request->harga,
+                ),
+                'customer_details' => array(
+                    'first_name' => 'budi',
+                    'last_name' => 'pratama',
+                    'email' => 'budi.pra@example.com',
+                    'phone' => '08111222333',
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $benih = BenihData::with(['akunProdusen' => function($query) {
+                $query->with('dataProdusen');
+            }])->where('id_benih', $pesanan->id_benih)->first();
+            return view('frontend.pesanan.checkout', compact('pesanan', 'benih', 'snapToken'));
         }catch (\Throwable $th) {
             dd($th);
             return back();
