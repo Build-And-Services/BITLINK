@@ -3,8 +3,8 @@
 <link rel="stylesheet" href={{asset("css/detail.css")}}>
      <!-- Detail Bibit -->
     <section class="detail-bibit section">
+        @foreach ($getPermintaanPesanan as $item)
         <div class="container">
-            @foreach ($getPermintaanPesanan as $item)
 
             <div class="row">
                 <div class="col-lg-5">
@@ -14,21 +14,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 mt-5">
                     {{-- <h2>Detail Bibit</h2> --}}
 
-                    <div class="single-bibit">
-                        <h2>Detail Produk</h2>
-                        <div class="content">
-                            <p class="text-with-underline" >Varietas : {{$item->benihData->varietas}}</p>
-                            <p class="text-with-underline my-5" >Jenis    : {{$item->benihData->jenis_benih}}</p>
-                            <p class="text-with-underline" >Kelas    : {{$item->benihData->kualitas_benih}}</p>
-                            <div class="content">
+                    <h2>Detail Produk</h2>
+                    <div class="single-bibit row align-items-center" style="height: 300px">
+                        <div class="col-12">
+                            <div class="content " style="height: auto">
+                                <p class="text-with-underline" >Varietas : {{$item->benihData->varietas}}</p>
+                                <p class="text-with-underline my-3" >Jenis    : {{$item->benihData->jenis_benih}}</p>
+                                <p class="text-with-underline" >Kelas    : {{$item->benihData->kualitas_benih}}</p>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <a href="{{route('distribusi.pesanan', $item->id)}}" class="btn btn-primary">Status Pesanan</a>
-                            <a href="{{url('permintaan-pesanan/invoice', $item->id)}}" class="btn btn-primary ml-2">Invoice</a>
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <a href="{{route('distribusi.pesanan', $item->id)}}" class="btn btn-primary">Status Pesanan</a>
+                                <a href="{{url('permintaan-pesanan/invoice', $item->id)}}" class="btn btn-primary ml-2">Invoice</a>
+                            </div>
+
                         </div>
 
                         <!-- Pop-up konfirmasi -->

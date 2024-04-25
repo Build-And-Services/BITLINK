@@ -125,4 +125,27 @@ class PesananController extends Controller
             return back();
         }
     }
+
+    public function riwayat($id)
+    {
+        try {
+            $riwayat = Pesanan::findOrFail($id);
+            $perusahaan = \DB::table('benih_data')
+            ->where('id_benih', $riwayat->id_benih)
+            ->join('users', 'users.id', '=', 'benih_data.id_akunp')
+            ->join('data_akun_produsen', 'data_akun_produsen.id_user', '=', 'users.id')
+            ->select([
+                'data_akun_produsen.nama_perusahaan', 'data_akun_produsen.nomor_legalitas_usaha', 'data_akun_produsen.alamat_lengkap'
+            ])->first();
+            return view('frontend.pesanan.history',
+            [
+                'getRiwayat' => $riwayat,
+                'getPerusahaan' => $perusahaan
+            ]);
+        } catch (\Throwable $e) {
+            return redirect()->back()->withError($e->getMessage());
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
+    }
 }
