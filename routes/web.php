@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/checkout/{id}/{quantity}', 'checkout');
         });
     });
-    
+
     Route::prefix('kedelai')->group(function () {
         Route::controller(ProductController::class)->group(function () {
             Route::get('/', 'kedelai');
@@ -87,6 +87,8 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index');
+    Route::get('/register', 'registerPage');
     Route::post('/login', 'login')->name('login');
+    Route::post('/register', 'register')->name('register');
     Route::get('/logout', 'logout');
 });
