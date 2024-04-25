@@ -74,7 +74,7 @@
                         <div class="container">
                             <div class="row d-flex justify-content-between">
                                 <div class="col-lg-1">
-                                    <a href="{{ url('detail-distribusi') }}">
+                                    <a href="{{ route('distribusi.pesanan', $distribusiPesanan->id) }}">
                                         <i class="fa-regular fa-circle-left fa-2xl"></i>
                                     </a>
                                 </div>
@@ -94,31 +94,38 @@
                         <form>
                             <div class="mb-3">
                                 <label for="pembayaranID" class="form-label">ID Pembayaran</label>
-                                <input type="text" class="form-control" id="pembayaranID" />
+                                <input type="text" class="form-control" id="pembayaranID"
+                                    value="{{ $distribusiPesanan->id }}" />
                             </div>
                             <div class="mb-3">
                                 <label for="NamaPembeli" class="form-label">Nama Pembeli</label>
-                                <input type="text" class="form-control" id="NamaPembeli">
+                                <input type="text" class="form-control" id="NamaPembeli"
+                                    value="{{ $distribusiPesanan->pembeli->name }}">
                             </div>
                             <div class="mb-3">
                                 <label for="alamatPembeli" class="form-label">Alamat Pembeli</label>
-                                <input type="text" class="form-control" id="alamatPembeli">
+                                <input type="text" class="form-control" id="alamatPembeli"
+                                    value="{{ $distribusiPesanan->alamat_lengkap }}">
                             </div>
                             <div class="mb-3">
                                 <label for="totalPembayaran" class="form-label">Total Pembayaran</label>
-                                <input type="text" class="form-control" id="totalPembayaran" />
+                                <input type="text" class="form-control" id="totalPembayaran"
+                                    value="{{ $distribusiPesanan->harga * $distribusiPesanan->quantity }}" />
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalPembelian" class="form-label">Tanggal Pembelian</label>
-                                <input type="text" class="form-control" id="tanggalPembelian">
+                                <input type="text" class="form-control" id="tanggalPembelian"
+                                    value="{{ $distribusiPesanan->created_at->format('d M Y') }}">
                             </div>
                             <div class="input-group d-block mb-3">
                                 <label for="status" class="form-label">Status</label>
-                                <select class="form-select w-100" style="background-color: black" aria-label="">
-                                    <option selected>-</option>
-                                    <option value="1">Terkirim</option>
-                                    <option value="2">Diterima</option>
-                                    <option value="3">Sedang Dikirim</option>
+                                <select class="form-select w-100" style="background-color: black" aria-label=""
+                                    name="status" id="status">
+                                    @foreach (['PROSES', 'SEDANG DIKIRIM', 'DITERIMA'] as $value)
+                                        <option value="{{ $value }}"
+                                            {{ $value == $distribusiPesanan->status_pengiriman ? 'selected' : '' }}>
+                                            {{ $value }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="w-75 mx-auto mt-5">
