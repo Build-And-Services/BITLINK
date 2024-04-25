@@ -21,7 +21,8 @@ return new class extends Migration {
             $table->date('tgl_pengiriman')->nullable();
             $table->date('tgl_diterima')->nullable();
             $table->enum('status_pembayaran', ['SUKSES', 'BELUM DIBAYAR', 'DIBATALKAN'])->default('BELUM DIBAYAR');
-            $table->enum('status_pengiriman', ['PROSES','SEDANG DIKIRIM', 'DITERIMA'])->default('PROSES');
+            $table->enum('status_pengiriman', ['PROSES', 'SEDANG DIKIRIM', 'DITERIMA'])->default('PROSES');
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }
