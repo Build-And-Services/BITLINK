@@ -26,7 +26,7 @@
                 <div class="col-lg-5">
                     <div class="single-bibit">
                         <div class="image">
-                            <img src="{{ asset('img/'.$benihData->foto_benih) }}" alt="#">
+                            <img src="{{ asset($benihData->foto_benih) }}" alt="#">
                         </div>
                     </div>
                 </div>

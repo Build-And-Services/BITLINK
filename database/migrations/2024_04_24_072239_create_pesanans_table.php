@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->integer('harga');
             $table->string('alamat_lengkap');
             $table->string('telepon');
-            $table->date('tgl_pengiriman');
-            $table->date('tgl_diterima');
+            $table->date('tgl_pengiriman')->nullable();
+            $table->date('tgl_diterima')->nullable();
             $table->enum('status_pembayaran', ['SUKSES', 'BELUM DIBAYAR', 'DIBATALKAN'])->default('BELUM DIBAYAR');
-            $table->enum('status_pengiriman', ['SEDANG DIKIRIM', 'DITERIMA']);
+            $table->enum('status_pengiriman', ['PROSES','SEDANG DIKIRIM', 'DITERIMA'])->default('PROSES');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BenihData;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,11 +25,15 @@ class ProductController extends Controller
         $benih = BenihData::with(['akunProdusen' => function($query) {
             $query->with('dataProdusen');
         }])->where('id_benih', $id)->first();
-        // dd($benih);
+
         return view('frontend.product.detail', compact('benih'));
     }
 
-    public function checkout(){
-        return view('frontend.product.checkout');
+    public function checkout($id, $quantity){
+        $benih = BenihData::with(['akunProdusen' => function($query) {
+            $query->with('dataProdusen');
+        }])->where('id_benih', $id)->first();
+
+        return view('frontend.product.checkout', compact(['benih', 'quantity']));
     }
 }

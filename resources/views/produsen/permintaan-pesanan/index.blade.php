@@ -28,7 +28,7 @@
                         </div>
                         <div class="d-flex">
                             <a href="{{route('distribusi.pesanan', $item->id)}}" class="btn btn-primary">Status Pesanan</a>
-                            <a href="{{url('permintaan-pesanan/invoice')}}" class="btn btn-primary ml-2">Invoice</a>
+                            <a href="{{url('permintaan-pesanan/invoice', $item->id)}}" class="btn btn-primary ml-2">Invoice</a>
                         </div>
 
                         <!-- Pop-up konfirmasi -->

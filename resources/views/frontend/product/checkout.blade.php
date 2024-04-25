@@ -31,21 +31,21 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-3">
-                    <img src="{{ url('img/1712425584.png') }}" class="img-thumbnail" alt="Logawa Seeds Image">
+                    <img src="{{ $benih->foto_benih }}" class="img-thumbnail" alt="Logawa Seeds Image">
                 </div>
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-5">
                             <h5>Logawa</h5>
-                            <p class="mt-2 text-danger">Rp. 20.000 /kg</p>
-                            <p class="badge badge-warning font-bold">PT Logawa hwo aini</p>
+                            <p class="mt-2 text-danger">Rp. {{ number_format($benih->harga_benih, 0, ',', '.') }} /kg</p>
+                            <p class="badge badge-warning font-bold">{{ $benih->akunProdusen->dataProdusen->nama_perusahaan }}</p>
                         </div>
                         <div class="col-md-7">
                             <h4>Informasi Benih</h4>
-                            <p>Stock: 20</p>
-                            <p>Jenis Padi: A</p>
-                            <p>Kelas Benih: A</p>
-                            <p>Quantiy: 2</p>
+                            <p>Stock: {{ $benih->stok_benih }}</p>
+                            <p>Jenis Padi: {{ $benih->jenis_benih }}</p>
+                            <p>Kelas Benih: {{ $benih->kualitas_benih }}</p>
+                            <p>Quantiy: {{ $quantity }}</p>
                         </div>
                     </div>
                 </div>
@@ -62,10 +62,10 @@
                     <h6>Total Pesanan</h6>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-6">
-                            <p>Total Harga (1 Barang)</p>
+                            <p>Total Harga ({{ $quantity }} Barang)</p>
                         </div>
                         <div class="col-md-6 text-end">
-                            <p style="text-align: end">Rp 500.000</p>
+                            <p style="text-align: end">Rp {{ number_format($benih->harga_benih, 0, ',', '.') }}</p>
                         </div>
                     </div>
                     <hr>
@@ -74,12 +74,21 @@
                             <h6>Total Tagihan</h6>
                         </div>
                         <div class="col-md-6 text-end">
-                            <h6 style="text-align: end">Rp 500.000</h6>
+                            <h6 style="text-align: end">Rp {{ number_format($quantity * $benih->harga_benih, 0, ',', '.') }}</h6>
                         </div>
                     </div>
                     <hr>
                     <div style="display: flex; justify-content: end;">
-                        <button class="btn btn-success">Bayar Sekarang</button>
+                        <form action="/checkout" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_benih" value="{{ $benih->id_benih }}">
+                            <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="alamat_lengkap" value="Jl. Papua">
+                            <input type="hidden" name="telepon" value="0873467345">
+                            <input type="hidden" name="quantity" value="{{ $quantity }}">
+                            <input type="hidden" name="harga" value="{{ $benih->harga_benih }}">
+                            <button class="btn btn-success">Bayar Sekarang</button>
+                        </form>
                     </div>
                 </div>
             </div>
