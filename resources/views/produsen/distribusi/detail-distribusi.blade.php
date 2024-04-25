@@ -93,44 +93,52 @@
                         <div class="col-lg-3 col-sm-12">
                             <div class="single-bibit">
                                 <div class="image">
-                                    <img src="{{ asset('img/1.png') }}" alt="#">
+                                    <img src="{{ $getDetailDistribusi->benihData->foto_benih }}" alt="#">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-9 col-sm-12">
                             <h5 class="font-weight-bold mt-4">Detail Produk</h5>
-                            <div class="row">
-                                <div class="col-lg-6 mt-3">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Varitas Benih</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp">
+                            <form>
+                                <fieldset disabled>
+                                    <div class="row">
+                                        <div class="col-lg-6 mt-3">
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Varitas Benih</label>
+                                                <input type="text" class="form-control" id="exampleInputtext1"
+                                                    aria-describedby="textHelp"
+                                                    value="{{ $getDetailDistribusi->benihData->varietas }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Kelas</label>
+                                                <input type="text" class="form-control" id="exampleInputtext1"
+                                                    value="{{ $getDetailDistribusi->benihData->kualitas_benih }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Jumlah Pesanan</label>
+                                                <input type="text" class="form-control" id="exampleInputtext1"
+                                                    value="{{ $getDetailDistribusi->quantity }}">
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Kelas</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                        <div class="col-lg-6 mt-3">
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Jenis</label>
+                                                <input type="text" class="form-control" id="exampleInputtext1"
+                                                    aria-describedby="textHelp"
+                                                    value="{{ $getDetailDistribusi->benihData->jenis_benih }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Harga</label>
+                                                <input type="text" class="form-control" id="exampleInputtext1"
+                                                    value="Rp {{ $getDetailDistribusi->benihData->harga_benih }} ,00">
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Jumlah Pesanan</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                </div>
-                                <div class="col-lg-6 mt-3">
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Jenis</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Harga</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <a href="{{ url('track-distribusi') }}" style="color: #fff" class="btn-primary">Track
-                                Distribusi </a>
+                                </fieldset>
+                                <a href="{{ url('track-distribusi') }}" style="color: #fff"
+                                    class="btn-primary">Track
+                                    Distribusi </a>
+                            </form>
                         </div>
                     </div>
                 </div>

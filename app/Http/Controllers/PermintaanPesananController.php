@@ -52,10 +52,12 @@ class PermintaanPesananController extends Controller
         }
     }
 
-    public function distribusi()
+    public function distribusi($id)
     {
         try {
-            return view('produsen.distribusi.detail-distribusi');
+            $pesanan = Pesanan::with('benihData', 'pembeli')->where('id', $id)->first();
+            // dd($pesanan);
+            return view('produsen.distribusi.detail-distribusi', ['getDetailDistribusi' => $pesanan]);
         } catch (\Throwable $e) {
             return redirect()->back()->withError($e->getMessage());
         } catch (\Illuminate\Database\QueryException $e) {
