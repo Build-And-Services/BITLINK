@@ -51,4 +51,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(DataAkunProdusen::class, 'id_user', 'id');
     }
+    public function dinas()
+    {
+        return $this->hasOne(DinasNganjuk::class, 'id_user', 'id');
+    }
+    public function nonDinas()
+    {
+        return $this->hasOne(DinasNonNganjuk::class, 'id_user', 'id');
+    }
 }

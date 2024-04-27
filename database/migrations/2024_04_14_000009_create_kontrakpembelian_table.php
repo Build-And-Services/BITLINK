@@ -12,7 +12,7 @@ class CreateKontrakPembelianTable extends Migration
             $table->id();
             $table->date('tgl_kontrak');
             $table->unsignedBigInteger('id_akunm');
-            $table->foreign('id_akunm')->references('id_akunm')->on('akundinasnonnganjuk')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_akunm')->references('id')->on('akundinasnonnganjuk')->onDelete('cascade')->onUpdate('cascade');
             $table->string('alamat_lengkap', 255);
             $table->string('email', 50);
             $table->string('telepon', 15);
