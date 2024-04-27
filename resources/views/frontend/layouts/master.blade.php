@@ -128,7 +128,7 @@
 											<li><a href="#">Profil </a></li>
 											<li><a href="#">Monitoring dan Edukasi </a></li>
 											<li><a href="{{ route('pesanan.index') }}">Pesanan </a></li>
-											@if (Auth::user()->role == 'PRODUSEN')
+											@if (Auth::user()->role == 'PRODUSEN' || Auth::user()->role == 'AKUN DINAS' )
 												<li><a href="{{url('/permintaan-pesanan')}}">Permintaan Pesanan </a></li>
 											@endif
                                             <div class="get-quote">
