@@ -75,4 +75,15 @@
             </div>
         </form>
     </section>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "{{ session('error') }}",
+                icon: "error",
+            })
+        </script>
+    @endif
 @endsection

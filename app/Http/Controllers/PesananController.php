@@ -89,6 +89,12 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         try {
+            $request->validate([
+                'alamat_lengkap' => 'required|string',
+                'telepon' => 'required|integer'
+            ], [
+                'telepon' => 'Nomor telepon tidak valid!'
+            ]);
             $pesanan = Pesanan::create($request->all());
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
             // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
@@ -121,8 +127,7 @@ class PesananController extends Controller
             ])->where('id_benih', $pesanan->id_benih)->first();
             return view('frontend.pesanan.checkout', compact('pesanan', 'benih', 'snapToken'));
         } catch (\Throwable $th) {
-            dd($th);
-            return back();
+            return redirect()->back()->with('error', $th->getMessage());
         }
     }
 
@@ -131,17 +136,21 @@ class PesananController extends Controller
         try {
             $riwayat = Pesanan::findOrFail($id);
             $perusahaan = \DB::table('benih_data')
-            ->where('id_benih', $riwayat->id_benih)
-            ->join('users', 'users.id', '=', 'benih_data.id_akunp')
-            ->join('data_akun_produsen', 'data_akun_produsen.id_user', '=', 'users.id')
-            ->select([
-                'data_akun_produsen.nama_perusahaan', 'data_akun_produsen.nomor_legalitas_usaha', 'data_akun_produsen.alamat_lengkap'
-            ])->first();
-            return view('frontend.pesanan.history',
-            [
-                'getRiwayat' => $riwayat,
-                'getPerusahaan' => $perusahaan
-            ]);
+                ->where('id_benih', $riwayat->id_benih)
+                ->join('users', 'users.id', '=', 'benih_data.id_akunp')
+                ->join('data_akun_produsen', 'data_akun_produsen.id_user', '=', 'users.id')
+                ->select([
+                    'data_akun_produsen.nama_perusahaan',
+                    'data_akun_produsen.nomor_legalitas_usaha',
+                    'data_akun_produsen.alamat_lengkap'
+                ])->first();
+            return view(
+                'frontend.pesanan.history',
+                [
+                    'getRiwayat' => $riwayat,
+                    'getPerusahaan' => $perusahaan
+                ]
+            );
         } catch (\Throwable $e) {
             return redirect()->back()->withError($e->getMessage());
         } catch (\Illuminate\Database\QueryException $e) {
