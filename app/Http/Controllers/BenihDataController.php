@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Models\BenihData;
+use Illuminate\Http\Request;
 use App\Models\DataKontrakPembelian;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BenihDataController extends Controller
 {
@@ -18,7 +19,10 @@ class BenihDataController extends Controller
 
     public function create()
     {
-        return view('frontend.product.tambah');
+        $perusahaan = Auth::user();
+        return view('frontend.product.tambah', [
+            'getPerusahaan' => $perusahaan
+        ]);
     }
 
     public function store(Request $request)
@@ -84,7 +88,8 @@ class BenihDataController extends Controller
     public function edit($id)
     {
         $benihData = BenihData::findOrFail($id);
-        return view('frontend.edit', compact('benihData'));
+        $perusahaan = Auth::user();
+        return view('frontend.edit', compact('benihData', 'perusahaan'));
     }
 
 

@@ -2,6 +2,26 @@
 @section('content')
     <link rel="stylesheet" href={{ asset('css/tambah.css') }}>
     <style>
+        .upload-button {
+    /* background-color: #4CAF50; */
+    color: white;
+    /* padding: 10px 20px;
+    border: none;
+    border-radius: 5px; */
+    cursor: pointer;
+  }
+  .close-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #preview-image {
+    max-width: 300px;
+    display: none;
+  }
         .nice-select {
             -webkit-tap-highlight-color: transparent;
             background-color: #fff;
@@ -212,77 +232,99 @@
             <div class="row">
                 <div class="col-12">
                     <!-- Tambah Bibit Inner -->
-                    <div class="tambah-bibit-inner">
-                        <h2>Tambah Produk Benih</h2>
-                        <form method="POST" action="{{ route('BenihData.store') }}" enctype="multipart/form-data">
-                            @csrf
-                            <!-- Input untuk atribut Benih -->
+                    <form method="POST" action="{{ route('BenihData.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
 
-                            <div class="form-group">
-                                <label for="varietas">Varietas Benih</label>
-                                <input type="text" class="form-control" id="varietas" name="varietas" required>
+                            <div class="tambah-bibit-inner col-7">
+                                <h2>Tambah Produk Benih</h2>
+                                    <!-- Input untuk atribut Benih -->
+
+                                <div class="form-group">
+                                    <label for="varietas">Varietas Benih</label>
+                                    <input type="text" class="form-control" id="varietas" name="varietas" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="varietas">CV</label>
+                                    <input type="text" class="form-control" id="varietas"
+                                        value="{{ $getPerusahaan->dataProdusen->nama_perusahaan }}" readonly>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group ml-3">
+                                        <label for="jenis_benih">Jenis Benih</label>
+                                        <select class="form-control" aria-label="Default select example" id="jenis_benih"
+                                            name="jenis_benih" required>
+                                            <option value="">Pilih Jenis Bibit</option>
+                                            <option value="padi">Padi</option>
+                                            <option value="kedelai">Kedelai</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group ml-5 mt-1">
+                                        <label for="kualitas_benih">Kelas Benih</label>
+                                        <input type="text" class="form-control" id="kualitas_benih" name="kualitas_benih"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stok_benih">Stok Benih</label>
+                                    <input type="number" class="form-control" id="stok_benih" name="stok_benih" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="harga_benih">Harga Benih</label>
+                                    <input type="number" class="form-control" id="harga_benih" name="harga_benih" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tgl_masuk">Tanggal Masuk</label>
+                                    <input type="date" class="form-control" id="tgl_masuk" name="tgl_masuk" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="turun_gudang">Turun Gudang</label>
+                                    <input type="number" class="form-control" id="turun_gudang" name="turun_gudang" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jemur_kering">Jemur Kering</label>
+                                    <input type="number" class="form-control" id="jemur_kering" name="jemur_kering" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="blower1">Blower 1</label>
+                                    <input type="number" class="form-control" id="blower1" name="blower1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="benih_susut">Benih Susut</label>
+                                    <input type="number" class="form-control" id="benih_susut" name="benih_susut" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="biji_kecil">Biji Kecil</label>
+                                    <input type="number" class="form-control" id="biji_kecil" name="biji_kecil" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jumlah_benih">Jumlah Benih</label>
+                                    <input type="number" class="form-control" id="jumlah_benih" name="jumlah_benih"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    {{-- <label for="id_akunp">ID Akun Produsen</label> --}}
+                                    <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" id="id_akunp"
+                                        name="id_akunp" required>
+                                </div>
                             </div>
-                            <div class="form-group" style="margin-bottom: 30px; margin-top: 20px;">
-                                <label for="jenis_benih">Jenis Benih</label>
-                                <select class="form-control" aria-label="Default select example" id="jenis_benih" name="jenis_benih" required>
-                                    <option value="">Pilih Jenis Bibit</option>
-                                    <option value="padi">Padi</option>
-                                    <option value="kedelai">Kedelai</option>
-                                </select>
+                            <div class="col-5 align-self-center">
+                                {{-- <div class="form-group">
+                                    <label for="foto_benih">Foto Benih</label>
+                                    <input type="file" class="form-control-file" id="foto_benih" name="foto_benih"
+                                        accept="image/*" required>
+                                </div> --}}
+
+                                <button class="close-button ml-4" onclick="cancelUpload()" id="cancel-button" type="button" style="display: none;">X</button>
+                                <div id="image-upload" class="text-center">
+                                    <img src="" class="mx-auto" alt="Preview" id="preview-image">
+                                    <button class="upload-button btn-primary btn-sm mt-4" type="button" onclick="openFileUploader()" style="width: 360px">Unggah Gambar</button>
+                                    <input type="file" id="file-input" name="foto_benih" style="display: none;" onchange="previewImage(event)">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="stok_benih">Stok Benih</label>
-                                <input type="number" class="form-control" id="stok_benih" name="stok_benih" required>
+                            <div class="mx-auto">
+                                <button type="submit" class="btn btn-success btn-sm" style="width: 750px">Simpan</button>
                             </div>
-                            <div class="form-group">
-                                <label for="kualitas_benih">Kelas Benih</label>
-                                <input type="text" class="form-control" id="kualitas_benih" name="kualitas_benih"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="harga_benih">Harga Benih</label>
-                                <input type="number" class="form-control" id="harga_benih" name="harga_benih" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="tgl_masuk">Tanggal Masuk</label>
-                                <input type="date" class="form-control" id="tgl_masuk" name="tgl_masuk" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="turun_gudang">Turun Gudang</label>
-                                <input type="number" class="form-control" id="turun_gudang" name="turun_gudang" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="jemur_kering">Jemur Kering</label>
-                                <input type="number" class="form-control" id="jemur_kering" name="jemur_kering" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="blower1">Blower 1</label>
-                                <input type="number" class="form-control" id="blower1" name="blower1" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="benih_susut">Benih Susut</label>
-                                <input type="number" class="form-control" id="benih_susut" name="benih_susut" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="biji_kecil">Biji Kecil</label>
-                                <input type="number" class="form-control" id="biji_kecil" name="biji_kecil" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah_benih">Jumlah Benih</label>
-                                <input type="number" class="form-control" id="jumlah_benih" name="jumlah_benih"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                {{-- <label for="id_akunp">ID Akun Produsen</label> --}}
-                                <input type="hidden" class="form-control" value="{{Auth::user()->id}}" id="id_akunp" name="id_akunp" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="foto_benih">Foto Benih</label>
-                                <input type="file" class="form-control-file" id="foto_benih" name="foto_benih"
-                                    accept="image/*" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
                     </form>
                 </div>
             </div>
@@ -293,4 +335,29 @@
     </section>
     <!--/ End Tambah Bibit Section -->
     <script src="{{ asset('js/tambah.js') }}"></script>
+    <script>
+        function openFileUploader() {
+          document.getElementById('file-input').click();
+        }
+
+        function previewImage(event) {
+          var input = event.target;
+          var reader = new FileReader();
+          reader.onload = function() {
+            var dataURL = reader.result;
+            var preview = document.getElementById('preview-image');
+            preview.src = dataURL;
+            preview.style.display = 'block';
+            document.getElementById('cancel-button').style.display = 'inline-block';
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+
+        function cancelUpload() {
+          document.getElementById('preview-image').src = '';
+          document.getElementById('preview-image').style.display = 'none';
+          document.getElementById('cancel-button').style.display = 'none';
+          document.getElementById('file-input').value = '';
+        }
+      </script>
 @stop
