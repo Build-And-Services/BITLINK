@@ -306,6 +306,7 @@
                                     {{-- <label for="id_akunp">ID Akun Produsen</label> --}}
                                     <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" id="id_akunp"
                                         name="id_akunp" required>
+                                    <input type="hidden" class="form-control" value="{{ Auth::user()->id }}">
                                 </div>
                             </div>
                             <div class="col-5 align-self-center">
